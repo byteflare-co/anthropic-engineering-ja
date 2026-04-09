@@ -44,10 +44,20 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Install Japanese fonts (Noto CJK)
+      - name: Install Japanese font (Noto Sans JP)
+        timeout-minutes: 3
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends fonts-noto-cjk fonts-noto-cjk-extra
+          # apt の fonts-noto-cjk (200MB) はミラーが遅くて 28 分スタックした実績あり。
+          # 代わりに Google Fonts repo から variable font 1 ファイル (~7MB) を
+          # jsdelivr CDN 経由で落として fc-cache に登録する。
+          mkdir -p ~/.local/share/fonts
+          curl -fsSL --retry 3 --max-time 120 \
+            -o ~/.local/share/fonts/NotoSansJP.ttf \
+            "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf"
+          fc-cache -f
+          echo "--- installed Noto Sans JP ---"
+          fc-list | grep -i "noto.*jp" | head -5
+          ls -lh ~/.local/share/fonts/
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
