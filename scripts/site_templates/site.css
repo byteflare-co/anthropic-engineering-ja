@@ -42,6 +42,13 @@ body {
     --font-serif: "Source Serif 4", "Noto Serif JP", "Yu Mincho",
                   "Hiragino Mincho ProN", "Times New Roman", serif;
     --font-mono: "JetBrains Mono", "Menlo", "Consolas", monospace;
+
+    /* PDF と同じフォントスタック。記事ページの本文・見出しで使う。
+       Yu Gothic を最優先にすることで macOS/Windows の PDF と視覚的に一致させる。 */
+    --font-pdf: "Yu Gothic", "YuGothic", "游ゴシック", "Hiragino Sans",
+                "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Inter", sans-serif;
+    /* PDF カバーの原題表記 ".original" と同じ Times New Roman italic */
+    --font-pdf-original: "Times New Roman", "Source Serif 4", "Noto Serif JP", serif;
 }
 
 /* ---- Layout -------------------------------------------------------- */
@@ -266,63 +273,125 @@ body {
 }
 .breadcrumb a:hover { color: var(--text); }
 
-/* ---- Article page -------------------------------------------------- */
+/* ---- Article page (PDF-matching) ---------------------------------- */
+/* 記事ページ全体は PDF 版と同じ配色・フォント・装飾にする。
+   scripts/style.css の色変数・スタイルをそのまま移植。 */
 .article-page {
-    max-width: 720px;
+    max-width: 780px;
     margin: 0 auto;
-}
-.article-header {
-    padding: 16px 0 40px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 40px;
-}
-.article-eyebrow {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 14px;
-    color: var(--text-subtle);
-    margin: 0 0 12px;
-}
-.article-headline {
-    font-family: var(--font-sans);
-    font-size: clamp(28px, 4vw, 40px);
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    margin: 0 0 24px;
-}
-.article-meta-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px 20px;
-    font-family: var(--font-sans);
-    font-size: 14px;
-    color: var(--text-muted);
-    align-items: center;
-}
-.article-meta-row time { font-variant-numeric: tabular-nums; }
-.meta-link {
-    color: var(--link);
-    text-decoration: none;
-    font-weight: 500;
-    padding: 6px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    background: var(--bg);
-    transition: all 140ms ease;
-}
-.meta-link:hover {
-    background: var(--bg-soft);
-    border-color: var(--accent);
-    color: var(--link-hover);
+
+    --pdf-accent: #c9a961;       /* PDF の --color-accent */
+    --pdf-accent-dark: #8a6f3d;  /* PDF の --color-accent-dark */
+    --pdf-code-bg: #f4f1ea;      /* PDF の --color-code-bg */
+    --pdf-code-border: #e5dcc3;
+    --pdf-quote-bg: #faf7f0;
 }
 
-/* ---- Article body prose -------------------------------------------- */
+/* ---- Article cover (PDF の .cover ページに相当) ------------------- */
+.article-cover {
+    position: relative;
+    padding: 56px 48px 48px;
+    margin: 0 0 48px;
+    background: linear-gradient(180deg, #f4ede1 0%, #efe6d3 100%);
+    border-radius: 6px;
+    overflow: hidden;
+}
+.article-cover::before,
+.article-cover::after {
+    content: "";
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    height: 1px;
+    background: var(--pdf-accent-dark);
+}
+.article-cover::before { top: 22px; }
+.article-cover::after  { bottom: 22px; }
+
+.cover-series {
+    font-family: var(--font-pdf-original);
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--pdf-accent-dark);
+    text-transform: uppercase;
+    margin: 0 0 18px;
+}
+.cover-number {
+    font-family: "Times New Roman", "Yu Mincho", "Noto Serif JP", serif;
+    font-size: 72px;
+    line-height: 1;
+    color: var(--pdf-accent-dark);
+    font-weight: 400;
+    margin: 0 0 18px;
+}
+.cover-title {
+    font-family: var(--font-pdf);
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.02em;
+    color: #1a1a1a;
+    margin: 0 0 10px;
+}
+.cover-original {
+    font-family: "Times New Roman", "Source Serif 4", "Noto Serif JP", serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #5a5a5a;
+    line-height: 1.45;
+    margin: 0 0 28px;
+}
+
+.cover-meta {
+    font-family: var(--font-pdf);
+    font-size: 13px;
+    color: #5a5a5a;
+    line-height: 1.95;
+    margin: 0 0 28px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2px 18px;
+}
+.cover-meta dt {
+    font-weight: 500;
+    color: var(--pdf-accent-dark);
+}
+.cover-meta dd {
+    margin: 0;
+    word-break: break-word;
+}
+.cover-meta a {
+    color: #5a5a5a;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 140ms ease;
+}
+.cover-meta a:hover { color: var(--pdf-accent-dark); }
+
+.cover-publisher {
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: var(--pdf-accent-dark);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* ---- Article body prose (PDF と同じ見た目) ------------------------ */
+/* フォントスタック・色・装飾はすべて PDF 版 (scripts/style.css) と同じ。 */
 .article-body {
-    font-family: var(--font-serif);
-    font-size: 17.5px;
-    line-height: 1.85;
-    color: #2b2b28;
+    font-family: var(--font-pdf);
+    font-size: 17px;
+    line-height: 1.9;
+    color: #1a1a1a;
+    font-feature-settings: "palt" 1;
+    text-align: justify;
+    hanging-punctuation: allow-end;
+    word-break: normal;
+    overflow-wrap: anywhere;
+    line-break: strict;
 }
 .article-body > :first-child { margin-top: 0; }
 .article-body > :last-child { margin-bottom: 0; }
@@ -330,100 +399,132 @@ body {
 .article-body h1,
 .article-body h2,
 .article-body h3,
-.article-body h4 {
-    font-family: var(--font-sans);
-    color: var(--text);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
-    margin-top: 2.4em;
-    margin-bottom: 0.6em;
-    font-weight: 600;
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+    font-family: var(--font-pdf);
+    color: #1a1a1a;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    text-align: left;
 }
-.article-body h1 { font-size: 30px; margin-top: 0; }
-.article-body h2 {
-    font-size: 26px;
-    padding-bottom: 0.3em;
-    border-bottom: 1px solid var(--rule);
-}
-.article-body h3 { font-size: 21px; }
-.article-body h4 { font-size: 18px; }
 
-.article-body p { margin: 0 0 1.1em; }
-.article-body strong { font-weight: 600; color: var(--text); }
+/* h1: PDF の本文先頭 h1 と同じ。gold 下線。 */
+.article-body h1 {
+    font-size: 28px;
+    margin: 0 0 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--pdf-accent);
+}
+/* h2: PDF と同じ gold 左縦罫 */
+.article-body h2 {
+    font-size: 22px;
+    margin: 40px 0 14px;
+    padding-left: 12px;
+    border-left: 4px solid var(--pdf-accent);
+}
+.article-body h3 {
+    font-size: 19px;
+    margin: 28px 0 10px;
+    color: #2a2a2a;
+}
+.article-body h4 {
+    font-size: 17px;
+    margin: 20px 0 8px;
+    font-weight: 500;
+}
+
+.article-body p {
+    margin: 0 0 1.1em;
+    text-align: justify;
+}
+.article-body strong { font-weight: 700; color: #1a1a1a; }
 .article-body em { font-style: italic; }
 
 .article-body a {
-    color: var(--link);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-    transition: color 140ms ease;
+    color: #4a6a9e;  /* PDF の --color-link */
+    text-decoration: none;
+    border-bottom: 1px dotted #a7b5cc;
+    transition: color 140ms ease, border-bottom-color 140ms ease;
 }
-.article-body a:hover { color: var(--link-hover); }
+.article-body a:hover {
+    color: var(--pdf-accent-dark);
+    border-bottom-color: var(--pdf-accent-dark);
+}
 
 .article-body ul, .article-body ol {
     margin: 0 0 1.2em;
-    padding-left: 1.6em;
+    padding-left: 1.8em;
+    text-align: left;
 }
-.article-body li { margin: 0.3em 0; }
-.article-body li > p { margin: 0.3em 0; }
+.article-body li { margin: 0.25em 0; line-height: 1.9; }
+.article-body li > p { margin: 0.25em 0; }
 
 .article-body blockquote {
     margin: 1.2em 0;
-    padding: 0.8em 1.2em;
-    background: var(--blockquote-bg);
-    border-left: 3px solid var(--accent);
-    color: #3a3a37;
-    border-radius: 0 4px 4px 0;
+    padding: 8px 16px 8px 20px;
+    background: var(--pdf-quote-bg);
+    border-left: 3px solid var(--pdf-accent);
+    color: #3a3a3a;
+    font-style: normal;
+    border-radius: 0 2px 2px 0;
 }
-.article-body blockquote p { margin: 0.4em 0; }
+.article-body blockquote p { margin: 0.4em 0; text-align: left; }
 
+/* code: PDF と同じ淡クリーム地 */
 .article-body code {
     font-family: var(--font-mono);
-    font-size: 0.88em;
-    background: var(--code-bg);
-    border: 1px solid var(--code-border);
-    padding: 0.08em 0.4em;
-    border-radius: 3px;
-    color: #5a3a00;
+    font-size: 0.9em;
+    background: var(--pdf-code-bg);
+    padding: 0.1em 0.4em;
+    border-radius: 2px;
+    color: #3a2a00;
 }
 .article-body pre {
     font-family: var(--font-mono);
-    font-size: 14px;
-    line-height: 1.6;
-    background: #1e1d1a;
-    color: #f5f1e4;
-    border-radius: 6px;
-    padding: 16px 20px;
-    margin: 1.2em 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+    background: var(--pdf-code-bg);
+    border: 1px solid var(--pdf-code-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 1.4em 0;
     overflow-x: auto;
-    border: 1px solid #2a2925;
+    color: #1a1a1a;
+    text-align: left;
 }
 .article-body pre code {
     background: transparent;
-    border: none;
     padding: 0;
     color: inherit;
     font-size: inherit;
+    border: none;
 }
 
 .article-body table {
     border-collapse: collapse;
     width: 100%;
     margin: 1.4em 0;
-    font-size: 15px;
-    font-family: var(--font-sans);
+    font-size: 14px;
+    font-family: var(--font-pdf);
 }
 .article-body th,
 .article-body td {
-    border: 1px solid var(--rule);
-    padding: 10px 14px;
+    border: 1px solid #d8cfb7;  /* PDF と同じ */
+    padding: 8px 12px;
     text-align: left;
     vertical-align: top;
 }
 .article-body th {
-    background: var(--bg-soft);
+    background: #f4ede1;  /* PDF と同じ */
     font-weight: 600;
+}
+
+.article-body hr {
+    border: none;
+    border-top: 1px solid var(--pdf-accent);
+    margin: 2em 0;
 }
 
 .article-body img {
