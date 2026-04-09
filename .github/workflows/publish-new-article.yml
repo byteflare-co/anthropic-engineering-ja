@@ -17,6 +17,7 @@ permissions:
   contents: write       # articles.py, articles/, pdfs/ の書き込みと push
   issues: write         # コメント・close
   pull-requests: write  # Claude Code Action が内部で使う可能性あり
+  id-token: write       # claude-code-action@v1 が OIDC を要求するため必須
 
 concurrency:
   group: publish-new-article
