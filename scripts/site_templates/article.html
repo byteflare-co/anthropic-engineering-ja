@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title_ja }} | {% endblock %}
+{% block main %}
+
+<nav class="breadcrumb"><a href="{{ prefix }}index.html">← 記事一覧</a></nav>
+
+<article class="article-page">
+  <header class="article-header">
+    <p class="article-eyebrow">{{ article.title }}</p>
+    <h1 class="article-headline">{{ article.title_ja }}</h1>
+    <div class="article-meta-row">
+      {% if article.date %}<time>{{ article.date }}</time>{% endif %}
+      <a class="meta-link" href="{{ prefix }}pdfs/{{ article.stem }}.pdf" target="_blank" rel="noopener">
+        📘 PDF をダウンロード
+      </a>
+      <a class="meta-link" href="{{ article.source_url }}" target="_blank" rel="noopener">
+        原文 (English) ↗
+      </a>
+    </div>
+  </header>
+
+  <div class="article-body">
+    {{ article.body_html | safe }}
+  </div>
+</article>
+
+<nav class="article-nav">
+  {% if prev_article %}
+  <a class="nav-link prev" href="{{ prev_article.stem }}.html">
+    <span class="nav-label">← 前の記事</span>
+    <span class="nav-title">{{ prev_article.title_ja }}</span>
+  </a>
+  {% else %}<span></span>{% endif %}
+  {% if next_article %}
+  <a class="nav-link next" href="{{ next_article.stem }}.html">
+    <span class="nav-label">次の記事 →</span>
+    <span class="nav-title">{{ next_article.title_ja }}</span>
+  </a>
+  {% else %}<span></span>{% endif %}
+</nav>
+
+{% endblock %}

@@ -22,3 +22,6 @@ __pycache__/
 # pdfs/
 # articles/en/
 # index.json
+
+# Site build output (deployed to GitHub Pages via workflow)
+site/

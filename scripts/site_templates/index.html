@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block main %}
+
+<section class="page-intro">
+  <h1 class="page-title">Engineering at Anthropic <em>日本語版</em></h1>
+  <p class="page-lead">
+    Anthropic の <a href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">Engineering ブログ</a>
+    を日本語で読めるようにまとめたコレクション。
+    新しい記事が公開されたら GitHub Actions が自動で取得・翻訳・PDF 化します。
+  </p>
+  <div class="page-stats">
+    <span class="stat"><strong>{{ total }}</strong> 本の記事</span>
+    <span class="stat"><strong>{{ total_pages }}</strong> ページ</span>
+    <span class="stat">更新日: {{ build_date }}</span>
+  </div>
+</section>
+
+<hr class="rule">
+
+{% if featured %}
+<section class="featured">
+  <div class="featured-label">Featured</div>
+  <a class="featured-card" href="articles/{{ featured.stem }}.html">
+    <h2 class="featured-title">{{ featured.title_ja }}</h2>
+    <p class="featured-subtitle">{{ featured.title }}</p>
+    {% if featured.summary %}<p class="featured-summary">{{ featured.summary }}</p>{% endif %}
+    <div class="featured-meta">
+      {% if featured.date %}<time>{{ featured.date }}</time>{% endif %}
+      <span class="read-more">読む →</span>
+    </div>
+  </a>
+</section>
+{% endif %}
+
+<section class="article-list">
+  {% for a in others %}
+  <a class="article-row" href="articles/{{ a.stem }}.html">
+    <div class="article-text">
+      <h3 class="article-title">{{ a.title_ja }}</h3>
+      <p class="article-subtitle">{{ a.title }}</p>
+    </div>
+    {% if a.date %}<time class="article-date">{{ a.date }}</time>{% endif %}
+  </a>
+  {% endfor %}
+</section>
+
+{% endblock %}
