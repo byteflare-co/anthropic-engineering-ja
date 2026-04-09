@@ -122,9 +122,14 @@ def _load_article(meta: ArticleMeta) -> dict | None:
 # ---- Site build ---------------------------------------------------------
 
 def _sort_key(article: dict) -> tuple:
-    """日付降順、空日付は最後に。同日付なら number 降順。"""
-    date = article["date"] or ""
-    return (0 if date else 1, date, -article["number"])
+    """日付降順でソートするためのキー。
+
+    - 日付がある記事は日付文字列（ISO 形式）で降順比較。
+    - 日付が無い記事（articles.py に日付未登録 = 新着）は「最新」扱いとして
+      先頭に来るよう、ダミーの '9999' を使う。
+    - 同じ日付同士では article.number（連番）で tiebreak し、大きい番号を前に。
+    """
+    return (article["date"] or "9999", article["number"])
 
 
 def build() -> Path:
@@ -142,7 +147,7 @@ def build() -> Path:
             print(f"[skip] no ja md: {meta.stem}", file=sys.stderr)
             continue
         loaded.append(article)
-    loaded.sort(key=lambda a: (a["date"] == "", a["date"]), reverse=True)
+    loaded.sort(key=_sort_key, reverse=True)
 
     # 最も新しい = 先頭を Featured にする
     featured = loaded[0] if loaded else None
