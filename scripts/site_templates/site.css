@@ -214,19 +214,24 @@ body {
 .read-more { font-weight: 500; color: var(--text); }
 
 /* ---- Article list (index) ----------------------------------------- */
+/* 負の水平マージン + 同量の row padding で、ホバー時の背景に息継ぎの
+   余白を持たせつつ、テキストの視覚的な位置は container 端に揃える。 */
 .article-list {
     border-top: 1px solid var(--rule);
+    margin-left: -20px;
+    margin-right: -20px;
 }
 .article-row {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
     gap: 24px;
-    padding: 22px 0;
+    padding: 22px 20px;
     border-bottom: 1px solid var(--rule);
+    border-radius: 4px;
     text-decoration: none;
     color: var(--text);
-    transition: background 120ms ease;
+    transition: background 140ms ease;
 }
 .article-row:hover { background: var(--bg-soft); }
 .article-row:hover .article-title { color: var(--accent-dark); }
@@ -611,7 +616,8 @@ body {
     .page-intro { padding: 20px 0 16px; }
     .page-stats { font-size: 12px; gap: 12px; }
 
-    .article-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 0; }
+    .article-list { margin-left: -16px; margin-right: -16px; }
+    .article-row { flex-direction: column; align-items: flex-start; gap: 6px; padding: 18px 16px; }
     .article-subtitle { white-space: normal; }
 
     .article-body { font-size: 16px; }
