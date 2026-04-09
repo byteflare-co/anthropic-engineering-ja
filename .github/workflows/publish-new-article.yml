@@ -1,0 +1,154 @@
+name: Publish new article (auto)
+
+# check-new-articles workflow が開いた `new-article` ラベル付き issue を検出して、
+# Claude Code に任せて翻訳・PDF 化・commit・push・issue close まで自動で進める。
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "手動実行する issue 番号"
+        required: true
+        type: string
+
+permissions:
+  contents: write       # articles.py, articles/, pdfs/ の書き込みと push
+  issues: write         # コメント・close
+  pull-requests: write  # Claude Code Action が内部で使う可能性あり
+
+concurrency:
+  group: publish-new-article
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    # issues イベントの場合は `new-article` ラベルがあるときだけ、
+    # workflow_dispatch の場合は常に実行
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.issue.labels.*.name, 'new-article')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0  # push のために full history が必要
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Japanese fonts (Noto CJK)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends fonts-noto-cjk fonts-noto-cjk-extra
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.13
+
+      - name: Sync dependencies
+        run: uv sync
+
+      - name: Install Playwright Chromium
+        run: uv run playwright install --with-deps chromium
+
+      - name: Resolve target issue
+        id: target
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            issue_number="${{ inputs.issue_number }}"
+          else
+            issue_number="${{ github.event.issue.number }}"
+          fi
+          echo "number=$issue_number" >> "$GITHUB_OUTPUT"
+
+          # Issue 本文を取得してファイルに保存（プロンプトに埋め込むため）
+          gh issue view "$issue_number" \
+            --repo "${{ github.repository }}" \
+            --json title,body,url \
+            > /tmp/issue.json
+          jq -r .title /tmp/issue.json > /tmp/issue_title.txt
+          jq -r .body  /tmp/issue.json > /tmp/issue_body.md
+          echo "Resolved issue #$issue_number"
+          cat /tmp/issue_title.txt
+
+      - name: Run Claude Code (publish article)
+        uses: anthropics/claude-code-action@v1
+        env:
+          ISSUE_NUMBER: ${{ steps.target.outputs.number }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--max-turns 60"
+          prompt: |
+            あなたは GitHub Actions 上で、このリポジトリ
+            (`${{ github.repository }}`) の新しい engineering ブログ記事を
+            日本語 PDF として追加する自動タスクを実行しています。
+
+            ## 環境
+
+            - cwd はリポジトリのルート（`$GITHUB_WORKSPACE`）。`cd` 不要。
+            - uv / Python 3.13 / Playwright Chromium / fonts-noto-cjk は
+              インストール済み。
+            - git の user.name / email は設定済み。HTTPS 認証は
+              `GITHUB_TOKEN` で設定済みなので `git push origin main` で push 可能。
+            - 対象の issue 番号: **${{ steps.target.outputs.number }}**
+            - 対象の issue 内容は `/tmp/issue_body.md` に保存されている。
+
+            ## 使うべき skill
+
+            `.claude/skills/publish-engineering-article-ja/SKILL.md` に
+            このプロジェクトの手順が完全に書かれています。**必ずこの skill を
+            読んで、その手順どおりに作業してください**。
+
+            ## やること
+
+            1. `/tmp/issue_body.md` を読んで、対象記事の **slug** と **URL** を特定する。
+            2. skill の手順に従って:
+               - `scripts/articles.py` の `ARTICLES` に新しい `ArticleMeta(...)` を追加
+               - `uv run python scripts/fetch_article.py --slug <slug>` で英語 md を取得
+               - `articles/en/NN_<slug>.md` を読んで高品質な日本語訳を
+                 `articles/ja/NN_<slug>.md` に書き出す（既存 22 本のスタイルに合わせる）
+               - `uv run python scripts/build_pdf.py --slug <slug>` で PDF 生成
+               - `index.json` を更新
+               - `uv run --with pypdf python` でページ数・冒頭テキストを検証
+            3. 問題なければ `git add` → `git commit` → `git push origin main`
+               - コミットメッセージ例:
+                 `feat: add NN_<slug> — <original English title>`
+            4. `gh issue comment ${{ steps.target.outputs.number }}` で
+               コミット SHA とともに完了報告
+            5. `gh issue close ${{ steps.target.outputs.number }}`
+
+            ## 注意
+
+            - 翻訳は機械的・雑にせず、**既存 22 本の品質を保つ**こと。
+              `articles/ja/02_building-effective-agents.md` などを参考に、
+              です・ます調で自然な日本語に訳す。
+            - 固有名詞 (Claude, Anthropic, MCP, Opus, Sonnet 等) は原文のまま。
+            - コードブロックは原文維持（コメントも原文のまま）。
+            - YAML frontmatter の `title_ja` にコロンが含まれるなら必ず
+              ダブルクォートで囲む（重要）。
+            - PDF 生成に失敗した場合はエラーを解析して skill の
+              トラブルシューティングセクションに従う。
+            - `open` コマンドは macOS 専用なので CI では使わない。
+            - 何か根本的に失敗したら issue にコメントして状況を報告して終了する。
+
+      - name: Report failure on issue
+        if: failure() && steps.target.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ steps.target.outputs.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "⚠️ 自動 publish workflow が失敗しました。詳しくはログを確認してください: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
