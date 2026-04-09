@@ -48,7 +48,6 @@ ARTICLES: list[ArticleMeta] = [
     ArticleMeta(19, "harness-design-long-running-apps", "Harness design for long-running application development", "2026-03-24"),
     ArticleMeta(20, "claude-code-auto-mode", "Claude Code auto mode: a safer way to skip permissions", "2026-03-25"),
     ArticleMeta(21, "managed-agents", "Scaling Managed Agents: Decoupling the brain from the hands", ""),
-    ArticleMeta(22, "infrastructure-noise", "Quantifying infrastructure noise in agentic coding evals", ""),
 ]
 
 

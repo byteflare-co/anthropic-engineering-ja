@@ -229,16 +229,5 @@
     "ja_path": "articles/ja/21_managed-agents.md",
     "pdf_path": "pdfs/21_managed-agents.pdf",
     "pdf_size_bytes": 963038
-  },
-  {
-    "number": 22,
-    "slug": "infrastructure-noise",
-    "title": "Quantifying infrastructure noise in agentic coding evals",
-    "date": "",
-    "source_url": "https://www.anthropic.com/engineering/infrastructure-noise",
-    "en_path": "articles/en/22_infrastructure-noise.md",
-    "ja_path": "articles/ja/22_infrastructure-noise.md",
-    "pdf_path": "pdfs/22_infrastructure-noise.pdf",
-    "pdf_size_bytes": 771197
   }
 ]
