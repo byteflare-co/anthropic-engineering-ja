@@ -71,32 +71,9 @@ ls pdfs/
 
 ## 記事一覧
 
-番号順。日付は原文の公開日。
+記事の一覧および PDF へのリンクは、公開サイトをご覧ください。
 
-| # | slug | タイトル | 日付 |
-|---|------|---------|------|
-| 01 | contextual-retrieval | Introducing Contextual Retrieval | 2024-09-19 |
-| 02 | building-effective-agents | Building effective agents | 2024-12-19 |
-| 03 | swe-bench-sonnet | Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet | 2025-01-06 |
-| 04 | claude-think-tool | The "think" tool | 2025-03-20 |
-| 05 | claude-code-best-practices | Claude Code: Best practices for agentic coding | 2025-04-18 |
-| 06 | multi-agent-research-system | How we built our multi-agent research system | 2025-06-13 |
-| 07 | desktop-extensions | Desktop Extensions | 2025-06-26 |
-| 08 | writing-tools-for-agents | Writing effective tools for agents — with agents | 2025-09-11 |
-| 09 | a-postmortem-of-three-recent-issues | A postmortem of three recent issues | 2025-09-17 |
-| 10 | effective-context-engineering-for-ai-agents | Effective context engineering for AI agents | 2025-09-29 |
-| 11 | claude-code-sandboxing | Beyond permission prompts: Claude Code sandboxing | 2025-10-20 |
-| 12 | code-execution-with-mcp | Code execution with MCP | 2025-11-04 |
-| 13 | advanced-tool-use | Introducing advanced tool use on the Claude Developer Platform | 2025-11-24 |
-| 14 | effective-harnesses-for-long-running-agents | Effective harnesses for long-running agents | 2025-11-26 |
-| 15 | demystifying-evals-for-ai-agents | Demystifying evals for AI agents | 2026-01-09 |
-| 16 | AI-resistant-technical-evaluations | Designing AI-resistant technical evaluations | 2026-01-21 |
-| 17 | building-c-compiler | Building a C compiler with a team of parallel Claudes | 2026-02-05 |
-| 18 | eval-awareness-browsecomp | Eval awareness in Claude Opus 4.6's BrowseComp performance | 2026-03-06 |
-| 19 | harness-design-long-running-apps | Harness design for long-running application development | 2026-03-24 |
-| 20 | claude-code-auto-mode | Claude Code auto mode | 2026-03-25 |
-| 21 | managed-agents | Scaling Managed Agents | - |
-| 22 | infrastructure-noise | Quantifying infrastructure noise in agentic coding evals | - |
+**→ https://byteflare-co.github.io/anthropic-engineering-ja/**
 
 ## 実装メモ
 
