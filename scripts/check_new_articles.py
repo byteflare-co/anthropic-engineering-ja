@@ -48,29 +48,64 @@ def fetch_index_html() -> str:
         return response.text
 
 
+def _clean_title(text: str) -> str:
+    """候補テキストを正規化する。"Featured" プレフィックスと連続空白を除去。"""
+    text = text.strip()
+    # "Featured" カードでは先頭に "Featured" が結合されていることがある
+    if text.startswith("Featured"):
+        text = text[len("Featured"):].lstrip()
+    # 連続する空白（改行含む）を 1 つにまとめる
+    text = re.sub(r"\s+", " ", text)
+    return text
+
+
+def _title_from_anchor(a) -> str:
+    """アンカー要素からクリーンなタイトルを取り出す。
+
+    アンカーの内側に `<h1>` 〜 `<h4>` があればそれを優先する（Featured カード
+    は 1 個の `<a>` に `<h2>` タイトル + 説明文が入っているため、見出しだけを
+    使わないと説明まで拾ってしまう）。見出しが無ければアンカー全体のテキスト。
+    """
+    for tag in ("h1", "h2", "h3", "h4"):
+        heading = a.find(tag)
+        if heading:
+            text = heading.get_text(strip=True)
+            if text:
+                return _clean_title(text)
+    return _clean_title(a.get_text(strip=True))
+
+
 def extract_articles(html: str) -> list[dict[str, str]]:
     """ブログ一覧ページから (slug, title, url) を抽出する。
 
-    `<a href="/engineering/<slug>">` 形式のリンクを集め、初出順に返す。
+    同じ slug に対して複数のアンカー（Featured カード + 通常カード）が
+    存在することがあるので、slug ごとに候補タイトルを集めた上で最も短い
+    （= 最もクリーンな）ものを選ぶ。
     """
     soup = BeautifulSoup(html, "html.parser")
-    found: list[dict[str, str]] = []
-    seen: set[str] = set()
+    candidates: dict[str, list[str]] = {}
+    order: list[str] = []
     for a in soup.find_all("a", href=True):
-        href = a["href"]
-        match = SLUG_RE.match(href)
+        match = SLUG_RE.match(a["href"])
         if not match:
             continue
         slug = match.group(1)
-        if slug in seen:
+        title = _title_from_anchor(a)
+        if not title:
             continue
-        seen.add(slug)
-        title = a.get_text(strip=True) or slug
+        if slug not in candidates:
+            candidates[slug] = []
+            order.append(slug)
+        candidates[slug].append(title)
+
+    found: list[dict[str, str]] = []
+    for slug in order:
+        texts = sorted(set(candidates[slug]), key=len)
         found.append(
             {
                 "slug": slug,
-                "title": title,
-                "url": f"https://www.anthropic.com{href}",
+                "title": texts[0],
+                "url": f"https://www.anthropic.com/engineering/{slug}",
             }
         )
     return found
