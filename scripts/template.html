@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<style>
+{{ css | safe }}
+</style>
+</head>
+<body>
+
+<section class="cover">
+    <div>
+        <div class="number">{{ "%02d" % number }}</div>
+        <h1>{{ title }}</h1>
+        {% if original_title %}<div class="original">— {{ original_title }} —</div>{% endif %}
+    </div>
+
+    <dl class="meta">
+        {% if date %}<dt>公開日</dt><dd>{{ date }}</dd>{% endif %}
+        <dt>原題</dt><dd>{{ original_title }}</dd>
+        <dt>著者</dt><dd>Anthropic Engineering Team</dd>
+        <dt>原文</dt><dd>{{ source_url }}</dd>
+        <dt>翻訳</dt><dd>Claude（機械翻訳／Anthropic）</dd>
+        <dt>編集</dt><dd>{{ build_date }}</dd>
+    </dl>
+
+    <div class="publisher">ANTHROPIC ENGINEERING BLOG</div>
+</section>
+
+<main class="body">
+{{ body | safe }}
+</main>
+
+</body>
+</html>
