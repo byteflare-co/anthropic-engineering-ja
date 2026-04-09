@@ -91,7 +91,10 @@ jobs:
           ISSUE_NUMBER: ${{ steps.target.outputs.number }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--max-turns 60"
+          # --permission-mode bypassPermissions: CI なので権限プロンプトはスキップ。
+          # --max-turns 200: 翻訳 + PDF 生成 + commit に必要な余裕を確保。
+          claude_args: "--permission-mode bypassPermissions --max-turns 200"
+          show_full_output: "true"
           prompt: |
             あなたは GitHub Actions 上で、このリポジトリ
             (`${{ github.repository }}`) の新しい engineering ブログ記事を
