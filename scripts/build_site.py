@@ -1,6 +1,11 @@
 """静的サイトをビルドする。
 
-articles/ja/*.md を読んで、`site/` 配下に HTML サイトを生成する。
+2 系統のブログを一括ビルドする。
+
+- Anthropic Engineering ブログ (`articles/ja/*.md`) → `site/anthropic/`
+- Claude ブログ (`articles/claude_ja/*.md`) → `site/claude/`
+- トップランディング (`scripts/site_templates_landing/`) → `site/index.html`
+
 GitHub Pages で公開することを想定。
 
 使い方:
@@ -9,10 +14,17 @@ GitHub Pages で公開することを想定。
 
 出力:
     site/
-    ├── index.html                    — 記事一覧
-    ├── articles/NN_slug.html         — 各記事
-    ├── pdfs/NN_slug.pdf              — PDF のコピー
-    └── assets/site.css
+    ├── index.html                             — ランディング (2 ブログ選択)
+    ├── assets/landing.css
+    ├── anthropic/
+    │   ├── index.html                         — Anthropic 記事一覧
+    │   ├── articles/NN_slug.html              — 各記事
+    │   ├── pdfs/NN_slug.pdf                   — PDF
+    │   └── assets/site.css
+    └── claude/
+        ├── index.html                         — Claude 記事一覧
+        ├── articles/NN_slug.html              — 各記事
+        └── assets/claude.css
 """
 
 from __future__ import annotations
@@ -31,11 +43,14 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 ROOT = Path(__file__).resolve().parent.parent
 SCRIPTS = ROOT / "scripts"
-TEMPLATES = SCRIPTS / "site_templates"
+TEMPLATES_ANTHROPIC = SCRIPTS / "site_templates"
+TEMPLATES_CLAUDE = SCRIPTS / "site_templates_claude"
+TEMPLATES_LANDING = SCRIPTS / "site_templates_landing"
 SITE = ROOT / "site"
 
 sys.path.insert(0, str(SCRIPTS))
 from articles import ARTICLES, ArticleMeta  # noqa: E402
+from claude_articles import CLAUDE_ARTICLES, ClaudeArticleMeta  # noqa: E402
 
 
 # ---- Markdown preprocessing --------------------------------------------
@@ -119,6 +134,26 @@ def _load_article(meta: ArticleMeta) -> dict | None:
     }
 
 
+def _load_claude_article(meta: ClaudeArticleMeta) -> dict | None:
+    ja_path = ROOT / "articles" / "claude_ja" / f"{meta.stem}.md"
+    if not ja_path.exists():
+        return None
+    post = frontmatter.load(ja_path)
+    title_ja = post.metadata.get("title_ja") or meta.title
+    date = post.metadata.get("date") or meta.date or ""
+    return {
+        "number": meta.number,
+        "slug": meta.slug,
+        "stem": meta.stem,
+        "title": meta.title,
+        "title_ja": title_ja,
+        "date": str(date),
+        "source_url": meta.source_url,
+        "summary": _extract_summary(post.content),
+        "body_html": _md_to_html(post.content),
+    }
+
+
 # ---- Site build ---------------------------------------------------------
 
 def _sort_key(article: dict) -> tuple:
@@ -132,41 +167,31 @@ def _sort_key(article: dict) -> tuple:
     return (article["date"] or "9999", article["number"])
 
 
-def build() -> Path:
-    if SITE.exists():
-        shutil.rmtree(SITE)
-    (SITE / "articles").mkdir(parents=True)
-    (SITE / "pdfs").mkdir(parents=True)
-    (SITE / "assets").mkdir(parents=True)
+def _build_anthropic(env: Environment, build_date: str) -> int:
+    """Anthropic Engineering ブログを site/anthropic/ にビルドする。"""
+    out_dir = SITE / "anthropic"
+    (out_dir / "articles").mkdir(parents=True)
+    (out_dir / "pdfs").mkdir(parents=True)
+    (out_dir / "assets").mkdir(parents=True)
 
-    # 記事ロード
-    loaded = []
+    loaded: list[dict] = []
     for meta in ARTICLES:
         article = _load_article(meta)
         if article is None:
-            print(f"[skip] no ja md: {meta.stem}", file=sys.stderr)
+            print(f"[skip] no ja md (anthropic): {meta.stem}", file=sys.stderr)
             continue
         loaded.append(article)
     loaded.sort(key=_sort_key, reverse=True)
 
-    # 最も新しい = 先頭を Featured にする
     featured = loaded[0] if loaded else None
     others = loaded[1:]
     total_pages = _count_pdf_pages()
 
-    # Jinja セットアップ
-    env = Environment(
-        loader=FileSystemLoader(str(TEMPLATES)),
-        autoescape=select_autoescape(),
-    )
-
-    build_date = _date.today().isoformat()
-
-    # index.html
     index_tmpl = env.get_template("index.html")
-    (SITE / "index.html").write_text(
+    (out_dir / "index.html").write_text(
         index_tmpl.render(
             prefix="",
+            site_root_prefix="../",
             featured=featured,
             others=others,
             total=len(loaded),
@@ -176,15 +201,15 @@ def build() -> Path:
         encoding="utf-8",
     )
 
-    # 各記事ページ
     article_tmpl = env.get_template("article.html")
     for i, article in enumerate(loaded):
         prev_article = loaded[i + 1] if i + 1 < len(loaded) else None
         next_article = loaded[i - 1] if i - 1 >= 0 else None
-        out = SITE / "articles" / f"{article['stem']}.html"
+        out = out_dir / "articles" / f"{article['stem']}.html"
         out.write_text(
             article_tmpl.render(
                 prefix="../",
+                site_root_prefix="../../",
                 article=article,
                 prev_article=prev_article,
                 next_article=next_article,
@@ -193,21 +218,120 @@ def build() -> Path:
             encoding="utf-8",
         )
 
-    # CSS コピー
-    shutil.copy(TEMPLATES / "site.css", SITE / "assets" / "site.css")
+    shutil.copy(TEMPLATES_ANTHROPIC / "site.css", out_dir / "assets" / "site.css")
 
-    # PDF コピー
     src_pdfs = ROOT / "pdfs"
     for pdf in sorted(src_pdfs.glob("*.pdf")):
-        shutil.copy(pdf, SITE / "pdfs" / pdf.name)
+        shutil.copy(pdf, out_dir / "pdfs" / pdf.name)
+
+    print(f"✓ built {len(loaded)} anthropic articles to {out_dir}")
+    return len(loaded)
+
+
+def _build_claude(env: Environment, build_date: str) -> int:
+    """Claude ブログを site/claude/ にビルドする。"""
+    out_dir = SITE / "claude"
+    (out_dir / "articles").mkdir(parents=True)
+    (out_dir / "assets").mkdir(parents=True)
+
+    loaded: list[dict] = []
+    for meta in CLAUDE_ARTICLES:
+        article = _load_claude_article(meta)
+        if article is None:
+            print(f"[skip] no ja md (claude): {meta.stem}", file=sys.stderr)
+            continue
+        loaded.append(article)
+    loaded.sort(key=_sort_key, reverse=True)
+
+    featured = loaded[0] if loaded else None
+    others = loaded[1:]
+
+    index_tmpl = env.get_template("index.html")
+    (out_dir / "index.html").write_text(
+        index_tmpl.render(
+            prefix="",
+            site_root_prefix="../",
+            featured=featured,
+            others=others,
+            total=len(loaded),
+            build_date=build_date,
+        ),
+        encoding="utf-8",
+    )
+
+    article_tmpl = env.get_template("article.html")
+    for i, article in enumerate(loaded):
+        prev_article = loaded[i + 1] if i + 1 < len(loaded) else None
+        next_article = loaded[i - 1] if i - 1 >= 0 else None
+        out = out_dir / "articles" / f"{article['stem']}.html"
+        out.write_text(
+            article_tmpl.render(
+                prefix="../",
+                site_root_prefix="../../",
+                article=article,
+                prev_article=prev_article,
+                next_article=next_article,
+                build_date=build_date,
+            ),
+            encoding="utf-8",
+        )
+
+    shutil.copy(TEMPLATES_CLAUDE / "claude.css", out_dir / "assets" / "claude.css")
+
+    print(f"✓ built {len(loaded)} claude articles to {out_dir}")
+    return len(loaded)
+
+
+def _build_landing(anthropic_total: int, claude_total: int) -> None:
+    """ルートに 2 ブログ選択用のランディングページを配置する。"""
+    (SITE / "assets").mkdir(parents=True, exist_ok=True)
+
+    env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_LANDING)),
+        autoescape=select_autoescape(),
+    )
+    tmpl = env.get_template("index.html")
+    (SITE / "index.html").write_text(
+        tmpl.render(
+            anthropic_total=anthropic_total,
+            claude_total=claude_total,
+        ),
+        encoding="utf-8",
+    )
+    shutil.copy(TEMPLATES_LANDING / "landing.css", SITE / "assets" / "landing.css")
+    print(f"✓ built landing page to {SITE / 'index.html'}")
+
+
+def build() -> Path:
+    if SITE.exists():
+        shutil.rmtree(SITE)
+    SITE.mkdir(parents=True)
+
+    build_date = _date.today().isoformat()
+
+    anthropic_env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_ANTHROPIC)),
+        autoescape=select_autoescape(),
+    )
+    claude_env = Environment(
+        loader=FileSystemLoader(str(TEMPLATES_CLAUDE)),
+        autoescape=select_autoescape(),
+    )
+
+    anthropic_total = _build_anthropic(anthropic_env, build_date)
+    claude_total = _build_claude(claude_env, build_date)
+    _build_landing(anthropic_total, claude_total)
 
     # .nojekyll: GitHub Pages に Jekyll 処理を抑制させる（_ で始まるファイル保護など）
     (SITE / ".nojekyll").write_text("")
 
-    print(f"✓ built {len(loaded)} articles to {SITE}")
-    print(f"  - index.html")
-    print(f"  - {len(loaded)} article pages")
-    print(f"  - {len(list((SITE / 'pdfs').glob('*.pdf')))} PDFs")
+    total_pdfs = len(list((SITE / "anthropic" / "pdfs").glob("*.pdf")))
+    print()
+    print(f"✓ built site to {SITE}")
+    print(f"  - landing: 1")
+    print(f"  - anthropic articles: {anthropic_total}")
+    print(f"  - claude articles: {claude_total}")
+    print(f"  - PDFs: {total_pdfs}")
     return SITE
 
 

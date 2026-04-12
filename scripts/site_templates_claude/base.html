@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>{% block title %}{% endblock %}Claude Blog 日本語版</title>
+<meta name="description" content="Claude ブログの非公式日本語訳コレクション。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ prefix }}assets/claude.css">
+</head>
+<body>
+  <header class="c-header">
+    <div class="c-container c-header-inner">
+      <a class="c-brand" href="{{ prefix }}index.html" aria-label="Claude Blog 日本語版ホームへ">
+        <span class="c-brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+            <path d="M12 2c-.87 0-1.71.17-2.5.5l-1.5 3-3.5 1.5c-.33.79-.5 1.63-.5 2.5 0 .87.17 1.71.5 2.5l3.5 1.5 1.5 3c.79.33 1.63.5 2.5.5s1.71-.17 2.5-.5l1.5-3 3.5-1.5c.33-.79.5-1.63.5-2.5 0-.87-.17-1.71-.5-2.5l-3.5-1.5-1.5-3C13.71 2.17 12.87 2 12 2z"/>
+          </svg>
+        </span>
+        <span class="c-brand-text">Claude Blog <em>日本語版</em></span>
+      </a>
+      <nav class="c-nav">
+        <a href="{{ site_root_prefix }}index.html">← ホーム</a>
+        <a href="https://claude.com/blog" target="_blank" rel="noopener">Original (English)</a>
+        <a href="https://github.com/byteflare-co/anthropic-engineering-ja" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="c-container c-main">
+    {% block main %}{% endblock %}
+  </main>
+
+  <footer class="c-footer">
+    <div class="c-container c-footer-inner">
+      <p class="c-footer-note">
+        Claude ブログ記事の非公式日本語訳コレクション。翻訳は Claude による機械翻訳。<br>
+        記事本文の著作権は Anthropic PBC に帰属します。
+      </p>
+      <p class="c-footer-links">
+        <a href="https://claude.com/blog" target="_blank" rel="noopener">Original</a>
+        <span>·</span>
+        <a href="https://github.com/byteflare-co/anthropic-engineering-ja" target="_blank" rel="noopener">GitHub</a>
+        <span>·</span>
+        <span>Built by byteflare-co</span>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

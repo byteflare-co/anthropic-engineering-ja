@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title_ja }} | {% endblock %}
+{% block main %}
+
+<nav class="c-breadcrumb"><a href="{{ prefix }}index.html">← 記事一覧</a></nav>
+
+<article class="c-article">
+  <header class="c-article-header">
+    <div class="c-article-eyebrow">CLAUDE BLOG</div>
+    <h1 class="c-article-title">{{ article.title_ja }}</h1>
+    <p class="c-article-original">{{ article.title }}</p>
+    <div class="c-article-meta">
+      {% if article.date %}<time>{{ article.date }}</time>{% endif %}
+      <span>·</span>
+      <a href="{{ article.source_url }}" target="_blank" rel="noopener">原文を読む</a>
+    </div>
+  </header>
+
+  <section class="c-article-body">
+    {{ article.body_html | safe }}
+  </section>
+</article>
+
+<nav class="c-article-nav">
+  {% if prev_article %}
+  <a class="c-nav-link c-nav-prev" href="{{ prev_article.stem }}.html">
+    <span class="c-nav-label">← 前の記事</span>
+    <span class="c-nav-title">{{ prev_article.title_ja }}</span>
+  </a>
+  {% else %}<span></span>{% endif %}
+  {% if next_article %}
+  <a class="c-nav-link c-nav-next" href="{{ next_article.stem }}.html">
+    <span class="c-nav-label">次の記事 →</span>
+    <span class="c-nav-title">{{ next_article.title_ja }}</span>
+  </a>
+  {% else %}<span></span>{% endif %}
+</nav>
+
+{% endblock %}

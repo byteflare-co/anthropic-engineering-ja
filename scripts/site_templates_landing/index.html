@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Anthropic / Claude ブログ 日本語版</title>
+<meta name="description" content="Anthropic Engineering ブログと Claude ブログの非公式日本語訳コレクション。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/landing.css">
+</head>
+<body>
+  <header class="l-header">
+    <div class="l-container l-header-inner">
+      <a class="l-brand" href="index.html">
+        <span class="l-brand-glyph">◈</span>
+        <span class="l-brand-text">Anthropic 日本語アーカイブ</span>
+      </a>
+      <nav class="l-nav">
+        <a href="https://github.com/byteflare-co/anthropic-engineering-ja" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="l-container l-main">
+    <section class="l-hero">
+      <div class="l-eyebrow">非公式 日本語訳コレクション</div>
+      <h1 class="l-title">Anthropic のブログ記事を、<br>日本語で、まとめて読む。</h1>
+      <p class="l-lead">
+        Anthropic と Claude が公開している 2 種類のブログ記事を日本語で読めるように
+        まとめたコレクションです。知りたい記事のあるブログを選んでください。
+      </p>
+    </section>
+
+    <section class="l-cards">
+      <a class="l-card l-card--anthropic" href="anthropic/index.html">
+        <div class="l-card-badge">ENGINEERING BLOG</div>
+        <h2 class="l-card-title">Engineering at Anthropic</h2>
+        <p class="l-card-subtitle">技術研究・実装の深掘りを集めたブログ</p>
+        <p class="l-card-desc">
+          Contextual Retrieval、Building effective agents、Context engineering など、
+          Anthropic のエンジニアリングチームが書き下ろした技術記事の日本語訳。
+          PDF 版もあり。
+        </p>
+        <div class="l-card-meta">
+          <span><strong>{{ anthropic_total }}</strong> 記事</span>
+          <span class="l-card-arrow">読む →</span>
+        </div>
+      </a>
+
+      <a class="l-card l-card--claude" href="claude/index.html">
+        <div class="l-card-badge">CLAUDE BLOG</div>
+        <h2 class="l-card-title">Claude Blog</h2>
+        <p class="l-card-subtitle">製品アップデートと活用事例のブログ</p>
+        <p class="l-card-desc">
+          Claude Code、Skills、Managed Agents、エンタープライズ活用など、
+          claude.com/blog で公開されている製品寄りの記事 (2025 年 10 月以降) の
+          日本語訳。
+        </p>
+        <div class="l-card-meta">
+          <span><strong>{{ claude_total }}</strong> 記事</span>
+          <span class="l-card-arrow">読む →</span>
+        </div>
+      </a>
+    </section>
+
+    <section class="l-note">
+      <p>
+        本リポジトリは Anthropic / Claude の公式ブログを非公式に日本語訳したものです。
+        翻訳はすべて Claude による機械翻訳で、正確な内容は必ず
+        <a href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">Anthropic Engineering</a>
+        および
+        <a href="https://claude.com/blog" target="_blank" rel="noopener">Claude Blog</a>
+        の原文をご確認ください。
+      </p>
+    </section>
+  </main>
+
+  <footer class="l-footer">
+    <div class="l-container l-footer-inner">
+      <p class="l-footer-note">
+        記事本文の著作権は Anthropic PBC に帰属します。翻訳は Claude による機械翻訳。
+      </p>
+      <p class="l-footer-links">
+        <a href="https://github.com/byteflare-co/anthropic-engineering-ja" target="_blank" rel="noopener">GitHub</a>
+        <span>·</span>
+        <span>Built by byteflare-co</span>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

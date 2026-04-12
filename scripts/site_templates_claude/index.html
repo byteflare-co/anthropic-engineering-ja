@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block main %}
+
+<section class="c-hero">
+  <div class="c-hero-eyebrow">CLAUDE BLOG — 日本語版</div>
+  <h1 class="c-hero-title">Claude の公式ブログを、<br>日本語でまとめて読む。</h1>
+  <p class="c-hero-lead">
+    Anthropic が運営する <a href="https://claude.com/blog" target="_blank" rel="noopener">Claude ブログ</a>
+    の記事 (2025 年 10 月以降) の非公式日本語訳コレクションです。製品アップデート、
+    エージェント構築、エンタープライズでの活用例などを網羅しています。
+  </p>
+  <div class="c-hero-stats">
+    <span class="c-stat"><strong>{{ total }}</strong>&nbsp;本の記事</span>
+    <span class="c-stat">更新日: {{ build_date }}</span>
+  </div>
+</section>
+
+{% if featured %}
+<section class="c-featured">
+  <a class="c-featured-card" href="articles/{{ featured.stem }}.html">
+    <div class="c-featured-label">最新記事</div>
+    <h2 class="c-featured-title">{{ featured.title_ja }}</h2>
+    <p class="c-featured-subtitle">{{ featured.title }}</p>
+    {% if featured.summary %}<p class="c-featured-summary">{{ featured.summary }}</p>{% endif %}
+    <div class="c-featured-meta">
+      {% if featured.date %}<time>{{ featured.date }}</time>{% endif %}
+      <span class="c-read-more">記事を読む →</span>
+    </div>
+  </a>
+</section>
+{% endif %}
+
+<section class="c-grid">
+  {% for a in others %}
+  <a class="c-card" href="articles/{{ a.stem }}.html">
+    {% if a.date %}<time class="c-card-date">{{ a.date }}</time>{% endif %}
+    <h3 class="c-card-title">{{ a.title_ja }}</h3>
+    <p class="c-card-subtitle">{{ a.title }}</p>
+    {% if a.summary %}<p class="c-card-summary">{{ a.summary }}</p>{% endif %}
+    <span class="c-card-more">読む →</span>
+  </a>
+  {% endfor %}
+</section>
+
+{% endblock %}

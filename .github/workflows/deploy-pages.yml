@@ -5,10 +5,14 @@ on:
     branches: [main]
     paths:
       - "articles/ja/**"
+      - "articles/claude_ja/**"
       - "pdfs/**"
       - "scripts/articles.py"
+      - "scripts/claude_articles.py"
       - "scripts/build_site.py"
       - "scripts/site_templates/**"
+      - "scripts/site_templates_claude/**"
+      - "scripts/site_templates_landing/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch: {}
 
