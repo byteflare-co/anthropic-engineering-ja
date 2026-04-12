@@ -1,0 +1,143 @@
+name: Publish new Claude blog article (auto)
+
+on:
+  issues:
+    types: [opened, labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "手動実行する issue 番号"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: publish-new-claude-article
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.issue.labels.*.name, 'new-claude-article')
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install Japanese font (Noto Sans JP)
+        timeout-minutes: 3
+        run: |
+          mkdir -p ~/.local/share/fonts
+          curl -fsSL --retry 3 --max-time 120 \
+            -o ~/.local/share/fonts/NotoSansJP.ttf \
+            "https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/notosansjp/NotoSansJP%5Bwght%5D.ttf"
+          fc-cache -f
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.13
+
+      - name: Sync dependencies
+        run: uv sync
+
+      - name: Install Playwright Chromium
+        run: uv run playwright install --with-deps chromium
+
+      - name: Resolve target issue
+        id: target
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            issue_number="${{ inputs.issue_number }}"
+          else
+            issue_number="${{ github.event.issue.number }}"
+          fi
+          echo "number=$issue_number" >> "$GITHUB_OUTPUT"
+
+          gh issue view "$issue_number" \
+            --repo "${{ github.repository }}" \
+            --json title,body,url \
+            > /tmp/issue.json
+          jq -r .title /tmp/issue.json > /tmp/issue_title.txt
+          jq -r .body  /tmp/issue.json > /tmp/issue_body.md
+          echo "Resolved issue #$issue_number"
+          cat /tmp/issue_title.txt
+
+      - name: Run Claude Code (publish Claude blog article)
+        uses: anthropics/claude-code-action@v1
+        env:
+          ISSUE_NUMBER: ${{ steps.target.outputs.number }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-opus-4-6 --permission-mode bypassPermissions --max-turns 200"
+          show_full_output: "true"
+          prompt: |
+            あなたは GitHub Actions 上で、このリポジトリ
+            (`${{ github.repository }}`) の新しい Claude ブログ記事を
+            日本語で追加する自動タスクを実行しています。
+
+            ## 環境
+
+            - cwd はリポジトリのルート。
+            - uv / Python 3.13 / Playwright Chromium はインストール済み。
+            - git の user.name / email は設定済み。
+            - 対象の issue 番号: **${{ steps.target.outputs.number }}**
+            - 対象の issue 内容は `/tmp/issue_body.md` に保存されている。
+
+            ## やること
+
+            1. `/tmp/issue_body.md` を読んで、対象記事の **slug** と **URL** を特定する。
+            2. `scripts/claude_articles.py` の `CLAUDE_ARTICLES` リストの末尾に
+               新しい `ClaudeArticleMeta(...)` を追加する。番号は既存最大 +1。
+            3. `uv run python scripts/fetch_claude_article.py --slug <slug>` で
+               英語 Markdown を取得する。
+            4. `articles/claude_en/NN_<slug>.md` を読んで高品質な日本語訳を
+               `articles/claude_ja/NN_<slug>.md` に書き出す。
+               - 既存の翻訳 (`articles/claude_ja/` 内) のスタイルに合わせる。
+               - です・ます調。固有名詞は原文維持。コードは原文維持。
+               - YAML frontmatter に `title_ja` を追加。
+            5. `uv run python scripts/build_site.py` でサイトをビルドし、
+               エラーがないことを確認する。
+            6. `git add` → `git commit` → `git push origin main`
+               - コミットメッセージ例:
+                 `feat(claude): add NN_<slug> — <original English title>`
+            7. `gh issue comment ${{ steps.target.outputs.number }}` で
+               コミット SHA とともに完了報告。
+            8. `gh issue close ${{ steps.target.outputs.number }}`
+
+            ## 注意
+
+            - 翻訳は機械的・雑にせず、既存翻訳の品質を保つこと。
+            - YAML frontmatter の `title_ja` にコロンが含まれるなら
+              ダブルクォートで囲む。
+            - `open` コマンドは macOS 専用なので CI では使わない。
+            - 何か根本的に失敗したら issue にコメントして状況を報告して終了する。
+
+      - name: Report failure on issue
+        if: failure() && steps.target.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment "${{ steps.target.outputs.number }}" \
+            --repo "${{ github.repository }}" \
+            --body "⚠️ 自動 publish workflow (Claude blog) が失敗しました。詳しくはログを確認してください: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
