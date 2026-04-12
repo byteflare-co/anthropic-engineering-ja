@@ -1,23 +1,51 @@
-# Anthropic Engineering ブログ 日本語版
+# Anthropic / Claude ブログ 日本語版
 
-Anthropic の [Engineering ブログ](https://www.anthropic.com/engineering) 全 22 記事を、
-日本語の PDF 読み物として保存するためのツール・成果物置き場です。
+Anthropic の [Engineering ブログ](https://www.anthropic.com/engineering) と
+[Claude ブログ](https://claude.com/blog) の記事を日本語で読めるようにまとめた
+コレクションです。
+
+**→ https://byteflare-co.github.io/anthropic-engineering-ja/**
+
+## 収録範囲
+
+| ブログ | 対象期間 | 記事数 | 特徴 |
+|--------|---------|--------|------|
+| Anthropic Engineering | 全期間 | 22 本 | 技術記事 — PDF 版あり |
+| Claude Blog | 2026-03〜 | 17 本 | 製品アップデート・活用事例 |
+
+新しい記事が公開されると、GitHub Actions が自動で取得・翻訳・デプロイします。
 
 ## ディレクトリ構成
 
 ```
 ├── scripts/
-│   ├── articles.py       # 22記事の目録（slug, title, date）
-│   ├── fetch_article.py  # 記事を取得して英語 Markdown 化
-│   ├── build_pdf.py      # 日本語 Markdown から書籍風 PDF 生成
-│   ├── template.html     # HTML テンプレート（Jinja2）
-│   └── style.css         # 印刷向け CSS（A4、游ゴシック）
+│   ├── articles.py                  # Anthropic 記事の目録
+│   ├── claude_articles.py           # Claude 記事の目録
+│   ├── fetch_article.py             # Anthropic 記事取得 (Playwright)
+│   ├── fetch_claude_article.py      # Claude 記事取得 (Playwright)
+│   ├── build_site.py                # 静的サイト生成 (Jinja2)
+│   ├── build_pdf.py                 # PDF 生成
+│   ├── check_new_articles.py        # Anthropic 新着チェッカ
+│   ├── check_new_claude_articles.py # Claude 新着チェッカ
+│   ├── site_templates/              # Anthropic 用テンプレート (セリフ調)
+│   ├── site_templates_claude/       # Claude 用テンプレート (モダン sans)
+│   └── site_templates_landing/      # ランディングページ
 ├── articles/
-│   ├── en/               # 英語原文 Markdown（fetch 結果）
-│   └── ja/               # 日本語訳 Markdown（人手＋Claude 翻訳）
-├── pdfs/                 # 最終成果物（22 PDF）
-├── index.json            # 全記事のメタデータ目録
-└── pyproject.toml
+│   ├── en/          # Anthropic 英語原文 Markdown
+│   ├── ja/          # Anthropic 日本語訳 Markdown
+│   ├── claude_en/   # Claude 英語原文 Markdown
+│   └── claude_ja/   # Claude 日本語訳 Markdown
+├── pdfs/            # Anthropic 記事の PDF（書籍風）
+├── site/            # ビルド出力（GitHub Pages にデプロイ）
+│   ├── index.html           — ランディング（2 ブログ選択）
+│   ├── anthropic/           — Anthropic Engineering セクション
+│   └── claude/              — Claude Blog セクション
+└── .github/workflows/
+    ├── deploy-pages.yml             # push 時にサイトをビルド・デプロイ
+    ├── check-new-articles.yml       # 毎日 Anthropic 新着を検出
+    ├── publish-new-article.yml      # Anthropic 記事を自動翻訳・登録
+    ├── check-new-claude-articles.yml  # 毎日 Claude 新着を検出
+    └── publish-new-claude-article.yml # Claude 記事を自動翻訳・登録
 ```
 
 ## セットアップ
@@ -32,62 +60,49 @@ uv run playwright install chromium   # 初回のみ
 ### 記事を取得する（英語 Markdown）
 
 ```bash
-# 単一記事
+# Anthropic Engineering
 uv run python scripts/fetch_article.py --slug building-effective-agents
-
-# 全記事（既存ファイルはスキップ）
 uv run python scripts/fetch_article.py --all
 
-# 上書きしたい場合
-uv run python scripts/fetch_article.py --all --force
+# Claude Blog
+uv run python scripts/fetch_claude_article.py --slug claude-managed-agents
+uv run python scripts/fetch_claude_article.py --all
 ```
 
-出力: `articles/en/NN_slug.md`
-
-### PDF を生成する
-
-`articles/ja/NN_slug.md`（日本語訳）を元に PDF を作ります。無ければ英語版を
-フォールバックとして使います。
+### サイトをビルドする
 
 ```bash
-# 単一記事
-uv run python scripts/build_pdf.py --slug building-effective-agents
+uv run python scripts/build_site.py
+uv run python scripts/build_site.py --serve   # ローカルで確認
+```
 
-# 全記事
+### PDF を生成する（Anthropic 記事のみ）
+
+```bash
+uv run python scripts/build_pdf.py --slug building-effective-agents
 uv run python scripts/build_pdf.py --all
 ```
 
-出力: `pdfs/NN_slug.pdf`
-
-### 記事を読む
+### 新着記事をチェックする
 
 ```bash
-# 1 本ずつ開く
-open pdfs/02_building-effective-agents.pdf
-
-# 一覧表示
-ls pdfs/
+uv run python scripts/check_new_articles.py          # Anthropic
+uv run python scripts/check_new_claude_articles.py    # Claude
 ```
 
-## 記事一覧
+## 自動更新パイプライン
 
-記事の一覧および PDF へのリンクは、公開サイトをご覧ください。
-
-**→ https://byteflare-co.github.io/anthropic-engineering-ja/**
-
-## 実装メモ
-
-- 取得は Playwright + Chromium で、`www.anthropic.com/engineering/<slug>` から。
-  記事 05（claude-code-best-practices）は `code.claude.com/docs/en/best-practices`
-  にリダイレクトされるので、`.mdx-content` セレクタで本文を取っている。
-- 本文抽出後は `markdownify` で Markdown 化、`python-frontmatter` でフロントマター付与。
-- PDF 生成は Playwright を使った HTML → PDF。書籍風の余白・見出し階層・ページ番号
-  を CSS の `@page` ルールで定義。和文フォントは **游ゴシック** をメイン、モノスペース
-  は Menlo。
-- Markdown の `<img>` に含まれる Next.js 画像 URL（`/_next/image?url=...`）は
-  `build_pdf.py` で元 CDN の URL にデコードしてから埋め込む。
-- ページヘッダには記事タイトル、フッタにはページ番号が出る。カバーページ（1 ページ目）
-  はヘッダ・フッタを隠し、番号＋原題＋原文 URL を記載。
+```
+毎日 00:17 UTC — check-new-articles.yml (Anthropic)
+毎日 00:47 UTC — check-new-claude-articles.yml (Claude)
+        ↓ 新着あり
+   Issue 作成 (new-article / new-claude-article ラベル)
+        ↓
+   publish-new-*-article.yml (Claude Code Action)
+   → fetch → 翻訳 → (PDF 生成) → commit → push → Issue close
+        ↓
+   deploy-pages.yml → GitHub Pages 更新
+```
 
 ## 翻訳について
 
@@ -99,13 +114,15 @@ ls pdfs/
 
 ## 本リポジトリの位置付け・著作権について
 
-本リポジトリは Anthropic Engineering Blog の **非公式な個人的日本語訳** です。
-Anthropic 社とは一切関係ありません。
+本リポジトリは Anthropic Engineering Blog および Claude Blog の
+**非公式な日本語訳** です。Anthropic 社とは一切関係ありません。
 
 - **原文の著作権は Anthropic PBC に帰属**します。翻訳は個人の学習・参照目的で
   作成したものであり、原著作権者の権利を主張・置き換えるものではありません。
 - 翻訳はすべて Claude（機械翻訳）によるもので、正確性は保証しません。
-  正確な内容は必ず[原文](https://www.anthropic.com/engineering) をご確認ください。
+  正確な内容は必ず原文をご確認ください。
+  - [Anthropic Engineering](https://www.anthropic.com/engineering)
+  - [Claude Blog](https://claude.com/blog)
 - 本コンテンツの再配布・商用利用を希望する場合は、Anthropic 側のポリシーに
   従ってください。翻訳部分についても上記原著作権の範囲内で扱う必要があります。
 - 翻訳の誤りや原文の解釈について、本リポジトリは **Issue・Pull Request を
