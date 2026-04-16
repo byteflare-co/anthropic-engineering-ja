@@ -107,6 +107,7 @@ jobs:
           # --max-turns 200: 翻訳 + PDF 生成 + commit に必要な余裕を確保。
           claude_args: "--model claude-opus-4-6 --permission-mode bypassPermissions --max-turns 200"
           show_full_output: "true"
+          allowed_bots: "github-actions[bot]"
           prompt: |
             あなたは GitHub Actions 上で、このリポジトリ
             (`${{ github.repository }}`) の新しい engineering ブログ記事を
