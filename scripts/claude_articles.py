@@ -51,6 +51,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(21, "how-enterprises-are-building-ai-agents-in-2026", "How enterprises are building AI agents in 2026", "2025-12-09"),
     ClaudeArticleMeta(22, "improving-frontend-design-through-skills", "Improving frontend design through Skills", "2025-11-12"),
     ClaudeArticleMeta(23, "building-ai-agents-in-financial-services", "Building AI agents for financial services", "2025-10-30"),
+    ClaudeArticleMeta(24, "claude-code-on-the-web", "Claude Code on the web", "2025-10-20"),
 ]
 
 
