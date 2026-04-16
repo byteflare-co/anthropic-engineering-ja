@@ -45,6 +45,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(15, "preparing-your-security-program-for-ai-accelerated-offense", "Preparing your security program for AI-accelerated offense", "2026-04-10"),
     ClaudeArticleMeta(16, "seeing-like-an-agent", "Seeing like an agent: how we design tools in Claude Code", "2026-04-10"),
     ClaudeArticleMeta(17, "multi-agent-coordination-patterns", "Multi-agent coordination patterns: Five approaches and when to use them", "2026-04-10"),
+    ClaudeArticleMeta(18, "using-claude-code-session-management-and-1m-context", "Using Claude Code: session management and 1M context", "2026-04-16"),
 ]
 
 
