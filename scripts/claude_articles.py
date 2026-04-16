@@ -47,6 +47,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(17, "multi-agent-coordination-patterns", "Multi-agent coordination patterns: Five approaches and when to use them", "2026-04-10"),
     ClaudeArticleMeta(18, "using-claude-code-session-management-and-1m-context", "Using Claude Code: session management and 1M context", "2026-04-15"),
     ClaudeArticleMeta(19, "claude-code-desktop-redesign", "Redesigning Claude Code on desktop for parallel agents", "2026-04-14"),
+    ClaudeArticleMeta(20, "introducing-routines-in-claude-code", "Introducing routines in Claude Code", "2026-04-14"),
 ]
 
 
