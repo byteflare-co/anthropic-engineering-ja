@@ -110,21 +110,28 @@ jobs:
             1. `/tmp/issue_body.md` を読んで、対象記事の **slug** と **URL** を特定する。
             2. `scripts/claude_articles.py` の `CLAUDE_ARTICLES` リストの末尾に
                新しい `ClaudeArticleMeta(...)` を追加する。番号は既存最大 +1。
+               date は暫定値でよい（本日の日付を入れる）。fetch 後に上書きする。
             3. `uv run python scripts/fetch_claude_article.py --slug <slug>` で
-               英語 Markdown を取得する。
-            4. `articles/claude_en/NN_<slug>.md` を読んで高品質な日本語訳を
+               英語 Markdown を取得する。fetch スクリプトは HTML から公開日を
+               自動抽出し `articles/claude_en/NN_<slug>.md` の frontmatter
+               `date` に書き込む。
+            4. `articles/claude_en/NN_<slug>.md` の frontmatter `date` を読み、
+               `scripts/claude_articles.py` の対応エントリの date を同じ値に
+               上書きする（暫定値を置き換え、両者を一致させる）。
+            5. 上記 `articles/claude_en/NN_<slug>.md` を元に高品質な日本語訳を
                `articles/claude_ja/NN_<slug>.md` に書き出す。
                - 既存の翻訳 (`articles/claude_ja/` 内) のスタイルに合わせる。
                - です・ます調。固有名詞は原文維持。コードは原文維持。
                - YAML frontmatter に `title_ja` を追加。
-            5. `uv run python scripts/build_site.py` でサイトをビルドし、
+               - frontmatter `date` は EN 側と同じ値を設定する。
+            6. `uv run python scripts/build_site.py` でサイトをビルドし、
                エラーがないことを確認する。
-            6. `git add` → `git commit` → `git push origin main`
+            7. `git add` → `git commit` → `git push origin main`
                - コミットメッセージ例:
                  `feat(claude): add NN_<slug> — <original English title>`
-            7. `gh issue comment ${{ steps.target.outputs.number }}` で
+            8. `gh issue comment ${{ steps.target.outputs.number }}` で
                コミット SHA とともに完了報告。
-            8. `gh issue close ${{ steps.target.outputs.number }}`
+            9. `gh issue close ${{ steps.target.outputs.number }}`
 
             ## 注意
 

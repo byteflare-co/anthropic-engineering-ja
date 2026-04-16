@@ -14,12 +14,23 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 
 import frontmatter
 from bs4 import BeautifulSoup, Tag
 from markdownify import markdownify as md
 from playwright.sync_api import sync_playwright
+
+MONTHS = {
+    "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
+    "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "jun": 6, "jul": 7, "aug": 8,
+    "sep": 9, "sept": 9, "oct": 10, "nov": 11, "dec": 12,
+}
+DATE_TEXT_RE = re.compile(
+    r"\b([A-Z][a-z]{2,8})\s+(\d{1,2}),\s+(20\d{2})\b"
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 EN_DIR = ROOT / "articles" / "claude_en"
@@ -54,6 +65,49 @@ STRIP_SELECTORS = [
 
 sys.path.insert(0, str(Path(__file__).parent))
 from claude_articles import CLAUDE_ARTICLES, ClaudeArticleMeta, find_by_slug  # noqa: E402
+
+
+def extract_published_date(html: str) -> str | None:
+    """記事 HTML から公開日を ISO 8601 (YYYY-MM-DD) で抽出する。
+
+    優先順: <time datetime>, meta[property=article:published_time],
+            meta[name=publish-date], 本文中の "Month DD, YYYY"。
+    """
+    soup = BeautifulSoup(html, "html.parser")
+
+    for t in soup.find_all("time"):
+        dt = t.get("datetime") or t.get("content")
+        if dt:
+            m = re.match(r"(\d{4}-\d{2}-\d{2})", dt)
+            if m:
+                return m.group(1)
+
+    for meta in soup.find_all("meta"):
+        name = (meta.get("property") or meta.get("name") or "").lower()
+        if name in {
+            "article:published_time",
+            "article:published",
+            "datepublished",
+            "publish-date",
+            "publishdate",
+            "pubdate",
+        }:
+            content = meta.get("content", "")
+            m = re.match(r"(\d{4}-\d{2}-\d{2})", content)
+            if m:
+                return m.group(1)
+
+    for text in soup.stripped_strings:
+        m = DATE_TEXT_RE.search(text)
+        if m:
+            month_name, day, year = m.group(1), m.group(2), m.group(3)
+            month = MONTHS.get(month_name.lower())
+            if month:
+                try:
+                    return datetime(int(year), month, int(day)).strftime("%Y-%m-%d")
+                except ValueError:
+                    continue
+    return None
 
 
 def extract_main(html: str) -> tuple[Tag, str]:
@@ -200,6 +254,13 @@ def fetch_one(page, meta: ClaudeArticleMeta) -> str:
 
     html = page.content()
     main, used_sel = extract_main(html)
+    published_date = extract_published_date(html) or meta.date
+    if published_date != meta.date:
+        print(
+            f"[date] {meta.stem}: using {published_date} from HTML "
+            f"(was {meta.date!r} in claude_articles.py)",
+            file=sys.stderr,
+        )
     strip_noise(main)
 
     body_md = md(
@@ -214,7 +275,7 @@ def fetch_one(page, meta: ClaudeArticleMeta) -> str:
     post = frontmatter.Post(
         content=body_md,
         title=meta.title,
-        date=meta.date,
+        date=published_date,
         slug=meta.slug,
         number=meta.number,
         source_url=meta.source_url,

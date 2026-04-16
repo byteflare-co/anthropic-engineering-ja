@@ -1,5 +1,5 @@
 ---
-date: '2026-04-16'
+date: '2026-04-15'
 final_url: https://claude.com/blog/using-claude-code-session-management-and-1m-context
 number: 18
 selector_used: main

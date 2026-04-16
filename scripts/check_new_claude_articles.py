@@ -59,14 +59,42 @@ def _clean_title(text: str) -> str:
     return text
 
 
+HEADING_TAGS = ("h1", "h2", "h3", "h4")
+
+
 def _title_from_anchor(a) -> str:
-    for tag in ("h1", "h2", "h3", "h4"):
+    for tag in HEADING_TAGS:
         heading = a.find(tag)
         if heading:
             text = heading.get_text(strip=True)
             if text:
                 return _clean_title(text)
     return _clean_title(a.get_text(strip=True))
+
+
+def _card_title_for_href(soup, href: str) -> str | None:
+    """Find the card title for a given href by looking at the heading that
+    DOM-precedes any anchor pointing to href (i.e. the title shown before
+    the "Read more" link in the same card).
+    """
+    anchors = [a for a in soup.find_all("a", href=True) if a["href"] == href]
+    best: str | None = None
+    best_distance = 10**9
+    for a in anchors:
+        heading = a.find_previous(list(HEADING_TAGS))
+        if heading is None:
+            continue
+        text = heading.get_text(strip=True)
+        if not text or text.lower() in {"blog", "read more"}:
+            continue
+        # Use DOM position distance as proxy for "nearest"
+        distance = sum(1 for _ in heading.next_elements) - sum(
+            1 for _ in a.next_elements
+        )
+        if distance < best_distance:
+            best = _clean_title(text)
+            best_distance = distance
+    return best
 
 
 def extract_articles(html: str) -> list[dict[str, str]]:
@@ -91,13 +119,25 @@ def extract_articles(html: str) -> list[dict[str, str]]:
             order.append(slug)
         candidates[slug].append(title)
 
+    generic_titles = {"read more", "learn more", "continue reading"}
+
     found: list[dict[str, str]] = []
     for slug in order:
-        texts = sorted(set(candidates[slug]), key=len)
+        texts = set(candidates[slug])
+        specific = [t for t in texts if t.lower() not in generic_titles and t]
+        if specific:
+            title = max(specific, key=len)
+        else:
+            href = f"/blog/{slug}"
+            card_title = _card_title_for_href(soup, href)
+            if card_title:
+                title = card_title
+            else:
+                title = max(texts, key=len) if texts else slug
         found.append(
             {
                 "slug": slug,
-                "title": texts[0],
+                "title": title,
                 "url": f"https://claude.com/blog/{slug}",
             }
         )
