@@ -49,6 +49,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(19, "claude-code-desktop-redesign", "Redesigning Claude Code on desktop for parallel agents", "2026-04-14"),
     ClaudeArticleMeta(20, "introducing-routines-in-claude-code", "Introducing routines in Claude Code", "2026-04-14"),
     ClaudeArticleMeta(21, "how-enterprises-are-building-ai-agents-in-2026", "How enterprises are building AI agents in 2026", "2025-12-09"),
+    ClaudeArticleMeta(22, "improving-frontend-design-through-skills", "Improving frontend design through Skills", "2025-11-12"),
 ]
 
 
