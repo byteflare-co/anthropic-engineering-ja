@@ -89,7 +89,7 @@ jobs:
           ISSUE_NUMBER: ${{ steps.target.outputs.number }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-opus-4-6 --permission-mode bypassPermissions --max-turns 200"
+          claude_args: "--model claude-opus-4-7 --permission-mode bypassPermissions --max-turns 200"
           show_full_output: "true"
           allowed_bots: "github-actions[bot]"
           prompt: |
