@@ -2,8 +2,9 @@ name: Check for new Claude blog articles
 
 on:
   schedule:
-    # 毎日 00:47 UTC (= JST 09:47) に実行。Anthropic 側 (00:17) と 30 分ずらす。
-    - cron: "47 0 * * *"
+    # 1 日 3 回、8 時間おきに実行 (UTC 00:47 / 08:47 / 16:47 = JST 09:47 / 17:47 / 01:47)。
+    # Anthropic 側 (00:17) と 30 分ずらす。
+    - cron: "47 0,8,16 * * *"
   workflow_dispatch: {}
 
 permissions:
