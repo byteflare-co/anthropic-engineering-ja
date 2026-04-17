@@ -50,10 +50,14 @@ URL は `https://www.anthropic.com/engineering/<slug>` の形式。
 （大文字小文字も維持。例: `AI-resistant-technical-evaluations`）。
 
 ```python
-ArticleMeta(23, "new-article-slug", "Original English Title", "2026-04-15"),
+ArticleMeta(23, "new-article-slug", "Original English Title", ""),
 ```
 
-日付は ISO 形式 `YYYY-MM-DD`。未発表の場合は空文字列 `""`。
+日付は空文字列 `""` で OK。`fetch_article.py` が原文ページの byline
+(例: *Published Oct 16, 2025*) を解析して ISO 形式 `YYYY-MM-DD` を
+自動で frontmatter に書き込む。
+手動で ISO 日付を入れてもよい（その場合は HTML 抽出値より articles.py 側は
+参考情報にとどまる。frontmatter は常に抽出値で上書きされる）。
 
 ### 4. 英語 Markdown の取得
 
@@ -153,6 +157,7 @@ uv run python scripts/build_pdf.py --slug <new-slug>
 uv run python -c "
 import json, sys
 from pathlib import Path
+import frontmatter
 sys.path.insert(0, 'scripts')
 from articles import ARTICLES
 out = []
@@ -160,11 +165,14 @@ for a in ARTICLES:
     en = Path(f'articles/en/{a.stem}.md')
     ja = Path(f'articles/ja/{a.stem}.md')
     pdf = Path(f'pdfs/{a.stem}.pdf')
+    date = a.date
+    if en.exists():
+        date = frontmatter.load(en).metadata.get('date') or a.date
     out.append({
         'number': a.number,
         'slug': a.slug,
         'title': a.title,
-        'date': a.date,
+        'date': date,
         'source_url': a.source_url,
         'en_path': str(en) if en.exists() else None,
         'ja_path': str(ja) if ja.exists() else None,
@@ -175,6 +183,9 @@ Path('index.json').write_text(json.dumps(out, indent=2, ensure_ascii=False) + '\
 print(f'written index.json with {len(out)} entries')
 "
 ```
+
+日付は `fetch_article.py` が原文ページから抽出した値（=英語版 frontmatter）が
+source of truth。`articles.py` 側はフォールバック。
 
 ### 8. 動作確認
 

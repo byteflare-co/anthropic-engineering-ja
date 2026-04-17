@@ -1,5 +1,5 @@
 ---
-date: '2026-04-16'
+date: '2025-10-16'
 final_url: https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills
 number: 23
 selector_used: article

@@ -58,6 +58,7 @@ STRIP_SELECTORS = [
 ]
 
 sys.path.insert(0, str(Path(__file__).parent))
+from _date_extract import extract_published_date  # noqa: E402
 from articles import ARTICLES, ArticleMeta, find_by_slug  # noqa: E402
 
 
@@ -110,6 +111,13 @@ def fetch_one(page, meta: ArticleMeta) -> str:
 
     html = page.content()
     main, used_sel = extract_main(html)
+    published_date = extract_published_date(html) or meta.date
+    if published_date != meta.date:
+        print(
+            f"[date] {meta.stem}: using {published_date} from HTML "
+            f"(was {meta.date!r} in articles.py)",
+            file=sys.stderr,
+        )
     strip_noise(main)
 
     # h1 は冒頭の見出しとして残す（markdownify が拾う）
@@ -125,7 +133,7 @@ def fetch_one(page, meta: ArticleMeta) -> str:
     post = frontmatter.Post(
         content=body_md,
         title=meta.title,
-        date=meta.date,
+        date=published_date,
         slug=meta.slug,
         number=meta.number,
         source_url=meta.source_url,
