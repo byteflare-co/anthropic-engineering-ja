@@ -50,6 +50,7 @@ ARTICLES: list[ArticleMeta] = [
     ArticleMeta(21, "managed-agents", "Scaling Managed Agents: Decoupling the brain from the hands", ""),
     ArticleMeta(22, "infrastructure-noise", "Quantifying infrastructure noise in agentic coding evals", ""),
     ArticleMeta(23, "equipping-agents-for-the-real-world-with-agent-skills", "Equipping agents for the real world with Agent Skills", "2025-10-16"),
+    ArticleMeta(24, "april-23-postmortem", "An update on recent Claude Code quality reports", ""),
 ]
 
 

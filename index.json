@@ -251,5 +251,16 @@
     "ja_path": "articles/ja/23_equipping-agents-for-the-real-world-with-agent-skills.md",
     "pdf_path": "pdfs/23_equipping-agents-for-the-real-world-with-agent-skills.pdf",
     "pdf_size_bytes": 1303293
+  },
+  {
+    "number": 24,
+    "slug": "april-23-postmortem",
+    "title": "An update on recent Claude Code quality reports",
+    "date": "2026-04-23",
+    "source_url": "https://www.anthropic.com/engineering/april-23-postmortem",
+    "en_path": "articles/en/24_april-23-postmortem.md",
+    "ja_path": "articles/ja/24_april-23-postmortem.md",
+    "pdf_path": "pdfs/24_april-23-postmortem.pdf",
+    "pdf_size_bytes": 1871231
   }
 ]
