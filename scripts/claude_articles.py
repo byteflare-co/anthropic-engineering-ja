@@ -58,6 +58,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(28, "building-agents-that-reach-production-systems-with-mcp", "Building agents that reach production systems with MCP", "2026-04-22"),
     ClaudeArticleMeta(29, "connectors-for-everyday-life", "New connectors in Claude for everyday life", "2026-04-23"),
     ClaudeArticleMeta(30, "claude-managed-agents-memory", "Built-in memory for Claude Managed Agents", "2026-04-23"),
+    ClaudeArticleMeta(31, "onboarding-claude-code-like-a-new-developer-lessons-from-17-years-of-development", "Onboarding Claude Code like a new developer: Lessons from 17 years of development", "2026-04-28"),
 ]
 
 
