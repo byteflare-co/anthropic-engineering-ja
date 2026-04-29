@@ -60,6 +60,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(30, "claude-managed-agents-memory", "Built-in memory for Claude Managed Agents", "2026-04-23"),
     ClaudeArticleMeta(31, "onboarding-claude-code-like-a-new-developer-lessons-from-17-years-of-development", "Onboarding Claude Code like a new developer: Lessons from 17 years of development", "2026-04-28"),
     ClaudeArticleMeta(32, "claude-api-skill", "Claude API skill now in CodeRabbit, JetBrains, Resolve AI, and Warp", "2026-04-29"),
+    ClaudeArticleMeta(33, "product-development-in-the-agentic-era", "Product development in the agentic era", "2026-04-29"),
 ]
 
 
