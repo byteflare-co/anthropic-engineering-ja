@@ -61,6 +61,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(31, "onboarding-claude-code-like-a-new-developer-lessons-from-17-years-of-development", "Onboarding Claude Code like a new developer: Lessons from 17 years of development", "2026-04-28"),
     ClaudeArticleMeta(32, "claude-api-skill", "Claude API skill now in CodeRabbit, JetBrains, Resolve AI, and Warp", "2026-04-29"),
     ClaudeArticleMeta(33, "product-development-in-the-agentic-era", "Product development in the agentic era", "2026-04-29"),
+    ClaudeArticleMeta(34, "new-guide-deploying-claude-across-the-enterprise-with-claude-cowork", "Deploying Claude across the enterprise with Claude Cowork", "2026-04-29"),
 ]
 
 
