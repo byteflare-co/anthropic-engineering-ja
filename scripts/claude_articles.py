@@ -66,6 +66,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(36, "lessons-from-building-claude-code-prompt-caching-is-everything", "Lessons from building Claude Code: Prompt caching is everything", "2026-04-30"),
     ClaudeArticleMeta(37, "building-ai-agents-for-the-enterprise", "Building AI agents for the enterprise", "2026-04-30"),
     ClaudeArticleMeta(38, "how-kepler-built-verifiable-ai-for-financial-services-with-claude", "How Kepler built verifiable AI for financial services with Claude", "2026-04-30"),
+    ClaudeArticleMeta(39, "how-a-non-technical-project-manager-built-and-shipped-a-stress-management-app-with-claude-code-in-six-weeks", "How a non-technical project manager built and shipped a stress management app with Claude Code in six weeks", "2026-05-01"),
 ]
 
 
