@@ -65,6 +65,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(35, "claude-security-public-beta", "Claude Security is now in public beta", "2026-04-30"),
     ClaudeArticleMeta(36, "lessons-from-building-claude-code-prompt-caching-is-everything", "Lessons from building Claude Code: Prompt caching is everything", "2026-04-30"),
     ClaudeArticleMeta(37, "building-ai-agents-for-the-enterprise", "Building AI agents for the enterprise", "2026-04-30"),
+    ClaudeArticleMeta(38, "how-kepler-built-verifiable-ai-for-financial-services-with-claude", "How Kepler built verifiable AI for financial services with Claude", "2026-04-30"),
 ]
 
 
