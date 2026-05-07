@@ -69,6 +69,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(39, "how-a-non-technical-project-manager-built-and-shipped-a-stress-management-app-with-claude-code-in-six-weeks", "How a non-technical project manager built and shipped a stress management app with Claude Code in six weeks", "2026-05-01"),
     ClaudeArticleMeta(40, "deploying-claude-across-financial-services", "Deploying Claude across financial services", "2026-05-05"),
     ClaudeArticleMeta(41, "new-in-claude-managed-agents", "New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration", "2026-05-06"),
+    ClaudeArticleMeta(42, "collaborate-with-claude-across-excel-powerpoint-word-and-outlook", "Collaborate with Claude across Excel, PowerPoint, Word and Outlook", "2026-05-07"),
 ]
 
 
