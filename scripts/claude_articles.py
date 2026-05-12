@@ -71,6 +71,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(41, "new-in-claude-managed-agents", "New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration", "2026-05-06"),
     ClaudeArticleMeta(42, "collaborate-with-claude-across-excel-powerpoint-word-and-outlook", "Collaborate with Claude across Excel, PowerPoint, Word and Outlook", "2026-05-07"),
     ClaudeArticleMeta(43, "claude-platform-on-aws", "Introducing the Claude Platform on AWS", "2026-05-11"),
+    ClaudeArticleMeta(44, "agent-view-in-claude-code", "Agent view in Claude Code", "2026-05-11"),
 ]
 
 
