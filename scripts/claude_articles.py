@@ -74,6 +74,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(44, "agent-view-in-claude-code", "Agent view in Claude Code", "2026-05-11"),
     ClaudeArticleMeta(45, "code-w-claude-sf-2026-sf", "Code w/ Claude SF 2026: Building on the AI exponential", "2026-05-12"),
     ClaudeArticleMeta(46, "how-anthropic-uses-claude-cybersecurity", "How Anthropic's cybersecurity team built a threat detection platform with Claude Code", "2026-05-12"),
+    ClaudeArticleMeta(47, "how-claude-code-works-in-large-codebases-best-practices-and-where-to-start", "How Claude Code works in large codebases: Best practices and where to start", "2026-05-14"),
 ]
 
 
