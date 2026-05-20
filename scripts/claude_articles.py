@@ -78,6 +78,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(48, "the-founders-playbook", "The founder's playbook: Building an AI-native startup", "2026-05-14"),
     ClaudeArticleMeta(49, "deploying-claude-across-the-legal-industry", "Deploying Claude across the legal industry", "2026-05-15"),
     ClaudeArticleMeta(50, "claude-managed-agents-updates", "New in Claude Managed Agents: self-hosted sandboxes and MCP tunnels", "2026-05-19"),
+    ClaudeArticleMeta(51, "using-claude-code-the-unreasonable-effectiveness-of-html", "Using Claude Code: The unreasonable effectiveness of HTML", "2026-05-20"),
 ]
 
 
