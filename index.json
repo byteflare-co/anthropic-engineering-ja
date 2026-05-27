@@ -262,5 +262,16 @@
     "ja_path": "articles/ja/24_april-23-postmortem.md",
     "pdf_path": "pdfs/24_april-23-postmortem.pdf",
     "pdf_size_bytes": 1871231
+  },
+  {
+    "number": 25,
+    "slug": "how-we-contain-claude",
+    "title": "How we contain Claude across products",
+    "date": "2026-05-25",
+    "source_url": "https://www.anthropic.com/engineering/how-we-contain-claude",
+    "en_path": "articles/en/25_how-we-contain-claude.md",
+    "ja_path": "articles/ja/25_how-we-contain-claude.md",
+    "pdf_path": "pdfs/25_how-we-contain-claude.pdf",
+    "pdf_size_bytes": 1976394
   }
 ]
