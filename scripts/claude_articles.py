@@ -87,6 +87,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(57, "how-coderabbit-used-claude-to-build-an-agent-orchestration-system", "How CodeRabbit Used Claude to Build an Agent Orchestration System", "2026-05-27"),
     ClaudeArticleMeta(58, "using-llms-to-secure-source-code", "Using LLMs to secure source code", "2026-05-27"),
     ClaudeArticleMeta(59, "zero-trust-for-ai-agents", "Zero Trust for AI agents", "2026-05-27"),
+    ClaudeArticleMeta(60, "introducing-dynamic-workflows-in-claude-code", "Introducing dynamic workflows in Claude Code", "2026-05-28"),
 ]
 
 
