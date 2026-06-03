@@ -89,6 +89,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(59, "zero-trust-for-ai-agents", "Zero Trust for AI agents", "2026-05-27"),
     ClaudeArticleMeta(60, "introducing-dynamic-workflows-in-claude-code", "Introducing dynamic workflows in Claude Code", "2026-05-28"),
     ClaudeArticleMeta(61, "running-an-ai-native-engineering-org", "Running an AI-native engineering org", "2026-06-03"),
+    ClaudeArticleMeta(62, "a-harness-for-every-task-dynamic-workflows-in-claude-code", "A harness for every task: dynamic workflows in Claude Code", "2026-06-02"),
 ]
 
 
