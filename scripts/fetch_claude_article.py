@@ -131,20 +131,53 @@ def clean_claude_blog_markdown(md_text: str) -> str:
             lines = lines[: h1_idx + 1] + lines[end + 1 :]
 
     # ---- 2) 末尾のテンプレ除去 -------------------------------------
-    # 以下のマーカーのうちいずれかが現れたら、そこ以降を切り捨てる。
-    trailing_markers = [
-        r"^\[Prev\]\(#\)\s*$",
+    # まず最も明確な footer マーカー (記事本文の後にしか現れない) で切る。
+    definitive_markers = [
         r"^## Transform how your organization operates with Claude\s*$",
         r"^Get the developer newsletter\s*$",
-        r"^eBook\s*$",
     ]
-    trailing_res = [re.compile(p) for p in trailing_markers]
+    definitive_res = [re.compile(p) for p in definitive_markers]
     cut = len(lines)
     for idx, line in enumerate(lines):
-        if any(r.match(line) for r in trailing_res):
+        if any(r.match(line) for r in definitive_res):
             cut = idx
             break
+    # 見つからなかった場合のみ、より曖昧なマーカー (記事中に埋め込み promo として
+    # 現れることがある) で切る。
+    if cut == len(lines):
+        ambiguous_markers = [
+            r"^\[Prev\]\(#\)\s*$",
+            r"^eBook\s*$",
+        ]
+        ambiguous_res = [re.compile(p) for p in ambiguous_markers]
+        for idx, line in enumerate(lines):
+            if any(r.match(line) for r in ambiguous_res):
+                cut = idx
+                break
     lines = lines[:cut]
+
+    # ---- 2b) 記事中に埋め込まれた eBook/Prev/Next の promo カルーセル除去 ---
+    # claude.com/blog では一部の記事で本文セクションの間に
+    # "[Prev](#) / 0/5 / [Next](#) / Get Claude Code / Developer docs / eBook"
+    # 形式の promo ブロックが挟まることがある。これらをまとめて削除する。
+    # ブロックの末尾は次の真の h2 見出し (## の後にテキストが続く形式) で判定する。
+    cleaned: list[str] = []
+    i = 0
+    heading_re = re.compile(r"^##\s+\S")
+    while i < len(lines):
+        if re.match(r"^\[Prev\]\(#\)\s*$", lines[i].strip()):
+            end = i
+            for j in range(i + 1, min(i + 30, len(lines))):
+                if heading_re.match(lines[j].strip()):
+                    end = j - 1
+                    break
+            else:
+                end = min(i + 29, len(lines) - 1)
+            i = end + 1
+            continue
+        cleaned.append(lines[i])
+        i += 1
+    lines = cleaned
 
     # ---- 3) "No items found." / FAQ 等のノイズ行除去 ---------------
     noise_lines = {
