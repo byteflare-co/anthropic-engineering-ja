@@ -92,6 +92,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(62, "a-harness-for-every-task-dynamic-workflows-in-claude-code", "A harness for every task: dynamic workflows in Claude Code", "2026-06-02"),
     ClaudeArticleMeta(63, "lessons-from-building-claude-code-how-we-use-skills", "Lessons from building Claude Code: How we use skills", "2026-06-03"),
     ClaudeArticleMeta(64, "how-anthropic-enables-self-service-data-analytics-with-claude", "How Anthropic enables self-service data analytics with Claude", "2026-06-03"),
+    ClaudeArticleMeta(65, "the-claude-cowork-product-guide", "The Claude Cowork product guide", "2026-06-05"),
 ]
 
 
