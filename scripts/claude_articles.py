@@ -96,6 +96,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(66, "how-anthropic-uses-claude-gtm-engineering", "How one Anthropic seller rebuilt his team's workflows with Claude Code", "2026-06-05"),
     ClaudeArticleMeta(67, "claude-for-foundation-models", "Building intelligent apps for Apple platforms with Claude in the Foundation Models framework", "2026-06-08"),
     ClaudeArticleMeta(68, "observability-for-developers-building-connectors", "Observability for developers building connectors", "2026-06-08"),
+    ClaudeArticleMeta(69, "whats-new-in-claude-managed-agents", "New in Claude Managed Agents: run agents on a schedule and store environment variables in vaults", "2026-06-09"),
 ]
 
 
