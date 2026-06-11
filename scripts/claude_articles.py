@@ -97,6 +97,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(67, "claude-for-foundation-models", "Building intelligent apps for Apple platforms with Claude in the Foundation Models framework", "2026-06-08"),
     ClaudeArticleMeta(68, "observability-for-developers-building-connectors", "Observability for developers building connectors", "2026-06-08"),
     ClaudeArticleMeta(69, "whats-new-in-claude-managed-agents", "New in Claude Managed Agents: run agents on a schedule and store environment variables in vaults", "2026-06-09"),
+    ClaudeArticleMeta(70, "building-with-claude-managed-agents", "The evolution of agentic surfaces: building with Claude Managed Agents", "2026-06-10"),
 ]
 
 
