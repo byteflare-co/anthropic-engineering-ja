@@ -99,6 +99,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(69, "whats-new-in-claude-managed-agents", "New in Claude Managed Agents: run agents on a schedule and store environment variables in vaults", "2026-06-09"),
     ClaudeArticleMeta(70, "building-with-claude-managed-agents", "The evolution of agentic surfaces: building with Claude Managed Agents", "2026-06-10"),
     ClaudeArticleMeta(71, "meet-the-winners-of-built-with-opus-4-7-claude-code-hackathon", "Meet the winners of Built with Opus 4.7 Claude Code hackathon", "2026-06-15"),
+    ClaudeArticleMeta(72, "meet-the-winners-of-our-claude-opus-4-8-build-day-hackathon", "Meet the winners of our Claude Opus 4.8 Build Day hackathon", "2026-06-17"),
 ]
 
 
