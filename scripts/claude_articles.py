@@ -102,6 +102,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(72, "meet-the-winners-of-our-claude-opus-4-8-build-day-hackathon", "Meet the winners of our Claude Opus 4.8 Build Day hackathon", "2026-06-17"),
     ClaudeArticleMeta(73, "workload-identity-federation", "Secure access to the Claude Platform with Workload Identity Federation", "2026-06-17"),
     ClaudeArticleMeta(74, "steering-claude-code-skills-hooks-rules-subagents-and-more", "Steering Claude Code: CLAUDE.md files, skills, hooks, rules, subagents and more", "2026-06-18"),
+    ClaudeArticleMeta(75, "enterprise-managed-auth", "Centrally manage authorization for MCP connectors", "2026-06-18"),
 ]
 
 
