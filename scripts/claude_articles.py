@@ -104,6 +104,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(74, "steering-claude-code-skills-hooks-rules-subagents-and-more", "Steering Claude Code: CLAUDE.md files, skills, hooks, rules, subagents and more", "2026-06-18"),
     ClaudeArticleMeta(75, "enterprise-managed-auth", "Centrally manage authorization for MCP connectors", "2026-06-18"),
     ClaudeArticleMeta(76, "artifacts-in-claude-code", "Claude Code now supports artifacts", "2026-06-18"),
+    ClaudeArticleMeta(77, "the-full-claude-desktop-experience-on-aws-google-cloud-and-microsoft-foundry", "The full Claude Desktop experience on AWS, Google Cloud, and Microsoft Foundry", "2026-06-22"),
 ]
 
 
