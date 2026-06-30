@@ -108,6 +108,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(78, "agent-identity-access-model", "Agent identity in Claude Tag: a new access model for autonomous, team-wide AI", "2026-06-24"),
     ClaudeArticleMeta(79, "building-effective-human-agent-teams", "Building effective human-agent teams", "2026-06-24"),
     ClaudeArticleMeta(80, "claude-in-microsoft-foundry", "Claude in Microsoft Foundry is now generally available", "2026-06-29"),
+    ClaudeArticleMeta(81, "introducing-the-claude-apps-gateway", "Introducing the Claude apps gateway for Amazon Bedrock and Google Cloud", "2026-06-29"),
 ]
 
 
