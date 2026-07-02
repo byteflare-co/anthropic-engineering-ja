@@ -110,6 +110,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(80, "claude-in-microsoft-foundry", "Claude in Microsoft Foundry is now generally available", "2026-06-29"),
     ClaudeArticleMeta(81, "introducing-the-claude-apps-gateway", "Introducing the Claude apps gateway for Amazon Bedrock and Google Cloud", "2026-06-29"),
     ClaudeArticleMeta(82, "getting-started-with-loops", "Getting started with loops", "2026-06-30"),
+    ClaudeArticleMeta(83, "giving-admins-more-visibility-and-control-over-claude-usage-and-spend", "Giving admins more visibility and control over Claude spend", "2026-07-02"),
 ]
 
 
