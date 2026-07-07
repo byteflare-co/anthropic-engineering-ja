@@ -112,6 +112,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(82, "getting-started-with-loops", "Getting started with loops", "2026-06-30"),
     ClaudeArticleMeta(83, "giving-admins-more-visibility-and-control-over-claude-usage-and-spend", "Giving admins more visibility and control over Claude spend", "2026-07-02"),
     ClaudeArticleMeta(84, "a-field-guide-to-claude-fable-finding-your-unknowns", "A Field Guide to Claude Fable: Finding Your Unknowns", "2026-07-06"),
+    ClaudeArticleMeta(85, "bringing-claude-code-and-claude-cowork-to-government", "Bringing Claude Code and Claude Cowork to government", "2026-07-07"),
 ]
 
 
