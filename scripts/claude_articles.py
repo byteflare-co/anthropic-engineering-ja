@@ -114,6 +114,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(84, "a-field-guide-to-claude-fable-finding-your-unknowns", "A Field Guide to Claude Fable: Finding Your Unknowns", "2026-07-06"),
     ClaudeArticleMeta(85, "bringing-claude-code-and-claude-cowork-to-government", "Bringing Claude Code and Claude Cowork to government", "2026-07-07"),
     ClaudeArticleMeta(86, "how-people-are-using-claude-cowork", "How people are using Claude Cowork", "2026-07-07"),
+    ClaudeArticleMeta(87, "working-at-the-frontier-how-thomson-reuters-builds-ai-for-high--stakes-professional-work", "Working at the frontier: How Thomson Reuters builds AI for high-stakes professional work", "2026-07-08"),
 ]
 
 
