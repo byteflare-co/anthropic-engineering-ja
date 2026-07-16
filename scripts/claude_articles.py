@@ -120,6 +120,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(90, "working-at-the-frontier-how-hebbia-builds-ai-for-financial-diligence-that-cant-miss-a-detail", "Working at the frontier: How Hebbia builds AI for financial diligence that can't miss a detail", "2026-07-13"),
     ClaudeArticleMeta(91, "working-at-the-frontier-why-base44-trusts-claude-fable-5-with-their-most-challenging-engineering-work", "Working at the frontier: Why Base44 trusts Claude Fable 5 with their most challenging engineering work", "2026-07-15"),
     ClaudeArticleMeta(92, "ai-code-migration", "How Anthropic runs large-scale code migrations with Claude Code", "2026-07-16"),
+    ClaudeArticleMeta(93, "working-with-claude-fable-5-in-claude-cowork", "Working with Claude Fable 5 in Claude Cowork", "2026-07-16"),
 ]
 
 
