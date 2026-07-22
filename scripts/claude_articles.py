@@ -126,6 +126,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(96, "how-anthropic-secures-its-ai-native-software-development-lifecycle", "How Anthropic Secures Its AI-Native Software Development Lifecycle", "2026-07-21"),
     ClaudeArticleMeta(97, "how-datadog-built-a-universal-machine-tool-for-claude-code", "How Datadog built a “universal machine tool” for Claude Code", "2026-07-21"),
     ClaudeArticleMeta(98, "building-verification-loops-in-claude-code-with-skills", "Building verification loops in Claude Code with skills", "2026-07-22"),
+    ClaudeArticleMeta(99, "how-outtake-built-a-cyber-investigator-on-claude", "How Outtake built a cyber investigator on Claude", "2026-07-22"),
 ]
 
 
