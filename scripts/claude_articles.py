@@ -132,6 +132,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(102, "how-the-product-designer-who-built-claude-design-uses-it-to-explore-ideas-before-building-them", "How the product designer who built Claude Design uses it to explore ideas before building them", "2026-07-24"),
     ClaudeArticleMeta(103, "claude-models-explained-choosing-the-best-model-for-your-use-case", "Claude models explained: choosing the best model for your use case", "2026-07-24"),
     ClaudeArticleMeta(104, "bringing-mcp-2026-07-28-to-claude", "Bringing MCP 2026-07-28 to Claude", "2026-07-28"),
+    ClaudeArticleMeta(105, "a-guide-to-cost-visibility-and-control-in-claude", "A guide to cost visibility and control in Claude", "2026-08-04"),
 ]
 
 
