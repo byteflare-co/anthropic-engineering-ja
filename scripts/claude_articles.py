@@ -133,6 +133,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(103, "claude-models-explained-choosing-the-best-model-for-your-use-case", "Claude models explained: choosing the best model for your use case", "2026-07-24"),
     ClaudeArticleMeta(104, "bringing-mcp-2026-07-28-to-claude", "Bringing MCP 2026-07-28 to Claude", "2026-07-28"),
     ClaudeArticleMeta(105, "a-guide-to-cost-visibility-and-control-in-claude", "A guide to cost visibility and control in Claude", "2026-08-04"),
+    ClaudeArticleMeta(106, "claude-enterprise-inference-hooks", "Inference hooks: inline data loss prevention for Claude Enterprise", "2026-08-05"),
 ]
 
 
