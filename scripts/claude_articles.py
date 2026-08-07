@@ -135,6 +135,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(105, "a-guide-to-cost-visibility-and-control-in-claude", "A guide to cost visibility and control in Claude", "2026-08-04"),
     ClaudeArticleMeta(106, "claude-enterprise-inference-hooks", "Inference hooks: inline data loss prevention for Claude Enterprise", "2026-08-05"),
     ClaudeArticleMeta(107, "millennium-and-anthropic-are-building-a-digital-risk-analyst-with-claude", "Millennium and Anthropic are building a digital risk analyst with Claude", "2026-08-06"),
+    ClaudeArticleMeta(108, "run-claude-code-sessions-on-your-own-compute", "Run Claude Code sessions on your own compute", "2026-08-06"),
 ]
 
 
