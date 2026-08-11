@@ -138,6 +138,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(108, "run-claude-code-sessions-on-your-own-compute", "Run Claude Code sessions on your own compute", "2026-08-06"),
     ClaudeArticleMeta(109, "auto-mode-default-in-claude-code", "Auto mode is now the default in Claude Code for Pro, Max, and Team plans", "2026-08-07"),
     ClaudeArticleMeta(110, "auto-mode-in-production", "Running auto mode in production", "2026-08-07"),
+    ClaudeArticleMeta(111, "how-anthropics-business-development-team-uses-claude-to-run-inbound-and-outbound-at-scale", "How Anthropic's business development team uses Claude to run inbound and outbound at scale", "2026-08-07"),
 ]
 
 
