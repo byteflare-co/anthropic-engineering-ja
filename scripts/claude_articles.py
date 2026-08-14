@@ -142,6 +142,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(112, "compliance-api-cowork-and-claude-code", "Compliance API coverage extends to Claude Cowork and Claude Code", "2026-08-11"),
     ClaudeArticleMeta(113, "cowork-chrome-side-panel", "The Claude in Chrome side panel is now Claude Cowork", "2026-08-12"),
     ClaudeArticleMeta(114, "claude-tag-now-reads-even-more-of-the-room", "Claude Tag now reads even more of the room", "2026-08-13"),
+    ClaudeArticleMeta(115, "self-service-data-analytics-in-slack-how-anthropic-deploys-claude-tag-for-ad-hoc-questions", "Self-service data analytics in Slack: how Anthropic deploys Claude Tag for ad-hoc questions", "2026-08-13"),
 ]
 
 
