@@ -144,6 +144,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(114, "claude-tag-now-reads-even-more-of-the-room", "Claude Tag now reads even more of the room", "2026-08-13"),
     ClaudeArticleMeta(115, "self-service-data-analytics-in-slack-how-anthropic-deploys-claude-tag-for-ad-hoc-questions", "Self-service data analytics in Slack: how Anthropic deploys Claude Tag for ad-hoc questions", "2026-08-13"),
     ClaudeArticleMeta(116, "how-jetbrains-evaluates-and-deploys-claude-fable-5", "Securing the frontier: How JetBrains evaluates and deploys Claude Fable 5", "2026-08-13"),
+    ClaudeArticleMeta(117, "maximizing-the-value-of-your-claude-code-sessions", "Maximizing the value of your Claude Code sessions", "2026-08-14"),
 ]
 
 
