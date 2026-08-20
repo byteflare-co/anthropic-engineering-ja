@@ -146,6 +146,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(116, "how-jetbrains-evaluates-and-deploys-claude-fable-5", "Securing the frontier: How JetBrains evaluates and deploys Claude Fable 5", "2026-08-13"),
     ClaudeArticleMeta(117, "maximizing-the-value-of-your-claude-code-sessions", "Maximizing the value of your Claude Code sessions", "2026-08-14"),
     ClaudeArticleMeta(118, "turning-conversation-into-knowledge-how-slack-builds-human-agent-teams", "Turning conversation into knowledge: how Slack builds human-agent teams", "2026-08-19"),
+    ClaudeArticleMeta(119, "the-claude-science-product-guide", "The Claude Science product guide", "2026-08-18"),
 ]
 
 
