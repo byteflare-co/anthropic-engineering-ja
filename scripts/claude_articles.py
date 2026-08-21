@@ -149,6 +149,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(119, "the-claude-science-product-guide", "The Claude Science product guide", "2026-08-18"),
     ClaudeArticleMeta(120, "anthropics-approach-to-teaching-and-learning-ai", "Anthropic's approach to teaching and learning AI", "2026-08-20"),
     ClaudeArticleMeta(121, "claude-code-guide-for-startups", "The Claude Code guide for startups", "2026-08-20"),
+    ClaudeArticleMeta(122, "computer-use-skills-api-files-api", "Build production agents with computer use, the Skills API, and the Files API", "2026-08-20"),
 ]
 
 
