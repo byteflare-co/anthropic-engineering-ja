@@ -152,6 +152,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(122, "computer-use-skills-api-files-api", "Build production agents with computer use, the Skills API, and the Files API", "2026-08-20"),
     ClaudeArticleMeta(123, "the-ai-native-sdlc-playbook", "The AI-Native SDLC playbook", "2026-08-21"),
     ClaudeArticleMeta(124, "bringing-claude-mythos-5-to-more-defenders", "Bringing the cybersecurity capabilities of Claude Mythos 5 to more defenders", "2026-08-21"),
+    ClaudeArticleMeta(125, "how-an-anthropic-field-marketer-uses-claude-code-to-send-weekly-personalized-updates-to-every-sales-rep", "How an Anthropic field marketer uses Claude Code to send weekly personalized updates to every sales rep", "2026-08-24"),
 ]
 
 
