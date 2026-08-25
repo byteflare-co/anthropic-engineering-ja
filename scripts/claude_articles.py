@@ -153,6 +153,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(123, "the-ai-native-sdlc-playbook", "The AI-Native SDLC playbook", "2026-08-21"),
     ClaudeArticleMeta(124, "bringing-claude-mythos-5-to-more-defenders", "Bringing the cybersecurity capabilities of Claude Mythos 5 to more defenders", "2026-08-21"),
     ClaudeArticleMeta(125, "how-an-anthropic-field-marketer-uses-claude-code-to-send-weekly-personalized-updates-to-every-sales-rep", "How an Anthropic field marketer uses Claude Code to send weekly personalized updates to every sales rep", "2026-08-24"),
+    ClaudeArticleMeta(126, "bain-company-joins-the-claude-partner-network-as-a-global-premier-partner", "Bain & Company joins the Claude Partner Network as a Global Premier partner", "2026-08-25"),
 ]
 
 
