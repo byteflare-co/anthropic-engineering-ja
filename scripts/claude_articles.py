@@ -155,6 +155,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(125, "how-an-anthropic-field-marketer-uses-claude-code-to-send-weekly-personalized-updates-to-every-sales-rep", "How an Anthropic field marketer uses Claude Code to send weekly personalized updates to every sales rep", "2026-08-24"),
     ClaudeArticleMeta(126, "bain-company-joins-the-claude-partner-network-as-a-global-premier-partner", "Bain & Company joins the Claude Partner Network as a Global Premier partner", "2026-08-25"),
     ClaudeArticleMeta(127, "claudes-memory-works-everywhere-and-you-decide-whats-in-it", "Claude's memory works everywhere, and you decide what's in it", "2026-08-25"),
+    ClaudeArticleMeta(128, "claude-in-chrome-generally-available", "Claude in Chrome is generally available", "2026-08-26"),
 ]
 
 
