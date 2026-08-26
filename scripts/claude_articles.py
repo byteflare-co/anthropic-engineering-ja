@@ -156,6 +156,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(126, "bain-company-joins-the-claude-partner-network-as-a-global-premier-partner", "Bain & Company joins the Claude Partner Network as a Global Premier partner", "2026-08-25"),
     ClaudeArticleMeta(127, "claudes-memory-works-everywhere-and-you-decide-whats-in-it", "Claude's memory works everywhere, and you decide what's in it", "2026-08-25"),
     ClaudeArticleMeta(128, "claude-in-chrome-generally-available", "Claude in Chrome is generally available", "2026-08-26"),
+    ClaudeArticleMeta(129, "how-warp-builds-self-improving-agents-on-claude", "How Warp builds self-improving agents on Claude", "2026-08-26"),
 ]
 
 
