@@ -157,6 +157,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(127, "claudes-memory-works-everywhere-and-you-decide-whats-in-it", "Claude's memory works everywhere, and you decide what's in it", "2026-08-25"),
     ClaudeArticleMeta(128, "claude-in-chrome-generally-available", "Claude in Chrome is generally available", "2026-08-26"),
     ClaudeArticleMeta(129, "how-warp-builds-self-improving-agents-on-claude", "How Warp builds self-improving agents on Claude", "2026-08-26"),
+    ClaudeArticleMeta(130, "cowork-built-in-browser", "Claude gets its own browser in Cowork", "2026-08-26"),
 ]
 
 
