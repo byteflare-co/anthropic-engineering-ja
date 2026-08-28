@@ -158,6 +158,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(128, "claude-in-chrome-generally-available", "Claude in Chrome is generally available", "2026-08-26"),
     ClaudeArticleMeta(129, "how-warp-builds-self-improving-agents-on-claude", "How Warp builds self-improving agents on Claude", "2026-08-26"),
     ClaudeArticleMeta(130, "cowork-built-in-browser", "Claude gets its own browser in Cowork", "2026-08-26"),
+    ClaudeArticleMeta(131, "claude-for-teachers-now-available-for-schools-and-districts", "Claude for Teachers, now available for schools and districts", "2026-08-28"),
 ]
 
 
