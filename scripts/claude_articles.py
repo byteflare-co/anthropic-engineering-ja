@@ -162,6 +162,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(132, "how-anthropic-employees-use-claude-tag", "How Anthropic employees use Claude Tag", "2026-08-28"),
     ClaudeArticleMeta(133, "the-anatomy-of-effective-commerce-agents", "A guide to the anatomy of effective commerce agents", "2026-09-02"),
     ClaudeArticleMeta(134, "claude-for-commerce-agents", "Building commerce agents with Claude", "2026-09-02"),
+    ClaudeArticleMeta(135, "reducing-cost-and-improving-performance-with-claude-platform", "Reducing cost and improving performance with Claude Platform", "2026-09-08"),
 ]
 
 
