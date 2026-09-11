@@ -164,6 +164,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(134, "claude-for-commerce-agents", "Building commerce agents with Claude", "2026-09-02"),
     ClaudeArticleMeta(135, "reducing-cost-and-improving-performance-with-claude-platform", "Reducing cost and improving performance with Claude Platform", "2026-09-08"),
     ClaudeArticleMeta(136, "t-rowe-price-brings-more-of-claude-to-its-investment-process", "T. Rowe Price brings more of Claude to its investment process", "2026-09-10"),
+    ClaudeArticleMeta(137, "what-1-000-small-business-owners-taught-us-about-ai", "What 1,000 small business owners taught us about AI", "2026-09-10"),
 ]
 
 
