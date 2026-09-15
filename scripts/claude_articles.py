@@ -167,6 +167,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(137, "what-1-000-small-business-owners-taught-us-about-ai", "What 1,000 small business owners taught us about AI", "2026-09-10"),
     ClaudeArticleMeta(138, "agentic-coding-is-straining-ci-heres-how-we-scaled-test-impact-analysis-at-anthropic", "Agentic coding is straining CI. Here's how we scaled test impact analysis at Anthropic", "2026-09-14"),
     ClaudeArticleMeta(139, "deploying-ai-from-pilot-to-production", "Deploying AI from pilot to production", "2026-09-14"),
+    ClaudeArticleMeta(140, "claude-for-small-business-launches-new-workflows-integrations-and-training-programs", "Claude for Small Business launches new workflows, integrations, and training programs", "2026-09-15"),
 ]
 
 
