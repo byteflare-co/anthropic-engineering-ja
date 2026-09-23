@@ -174,6 +174,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(144, "what-a-task-costs-on-opus-5-5", "What a task costs on Opus 5.5", "2026-09-22"),
     ClaudeArticleMeta(145, "how-to-prepare-for-ai-driven-code-modernization-projects", "How to prepare for AI-driven code modernization projects", "2026-09-23"),
     ClaudeArticleMeta(146, "how-coderabbit-power-digital-and-thoughtspot-scale-with-snowflake-and-vercel-on-claude-marketplace", "How CodeRabbit, Power Digital, and ThoughtSpot scale with Snowflake and Vercel on Claude Marketplace", "2026-09-23"),
+    ClaudeArticleMeta(147, "claude-marketplace", "Claude Marketplace: one place to discover plugins, agents, and services from our partners", "2026-09-23"),
 ]
 
 
