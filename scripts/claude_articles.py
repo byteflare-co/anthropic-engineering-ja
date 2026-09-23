@@ -172,6 +172,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(142, "cowork-is-now-claude", "Claude Cowork and chat are now one Claude", "2026-09-16"),
     ClaudeArticleMeta(143, "projects-redesigned", "Projects redesigned: from folder to conversation", "2026-09-17"),
     ClaudeArticleMeta(144, "what-a-task-costs-on-opus-5-5", "What a task costs on Opus 5.5", "2026-09-22"),
+    ClaudeArticleMeta(145, "how-to-prepare-for-ai-driven-code-modernization-projects", "How to prepare for AI-driven code modernization projects", "2026-09-23"),
 ]
 
 
