@@ -178,6 +178,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(148, "claude-opus-5-5-built-for-coding-sessions-that-use-more-context", "Coding sessions are longer and use more context. Claude Opus 5.5 is built with that in mind.", "2026-09-24"),
     ClaudeArticleMeta(149, "claude-tag-now-supports-personal-connectors-in-channels", "Claude Tag now supports personal connectors in channels", "2026-09-24"),
     ClaudeArticleMeta(150, "build-plugins-for-claude", "Build plugins for Claude", "2026-09-25"),
+    ClaudeArticleMeta(151, "giving-companies-more-control-over-their-ai-agents-with-nvidia", "Giving companies more control over their AI agents, with NVIDIA", "2026-09-28"),
 ]
 
 
