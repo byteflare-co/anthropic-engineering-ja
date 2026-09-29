@@ -179,6 +179,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(149, "claude-tag-now-supports-personal-connectors-in-channels", "Claude Tag now supports personal connectors in channels", "2026-09-24"),
     ClaudeArticleMeta(150, "build-plugins-for-claude", "Build plugins for Claude", "2026-09-25"),
     ClaudeArticleMeta(151, "giving-companies-more-control-over-their-ai-agents-with-nvidia", "Giving companies more control over their AI agents, with NVIDIA", "2026-09-28"),
+    ClaudeArticleMeta(152, "agents-you-can-coach-how-asana-builds-human-agent-teams-with-claude", "Agents you can coach: how Asana builds human-agent teams with Claude", "2026-09-29"),
 ]
 
 
