@@ -183,6 +183,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(153, "how-anthropics-sales-team-rebuilt-inbound-with-claude-managed-agents", "How Anthropic's sales team rebuilt inbound with Claude Managed Agents", "2026-09-30"),
     ClaudeArticleMeta(154, "claude-for-government-is-now-generally-available", "Claude for Government is now generally available", "2026-09-30"),
     ClaudeArticleMeta(155, "claude-code-mods", "Customize Claude Code with mods", "2026-10-01"),
+    ClaudeArticleMeta(156, "how-cresta-turned-cx-expertise-into-an-agent-builder-on-the-claude-agent-sdk", "How Cresta turned CX expertise into an agent builder on the Claude Agent SDK", "2026-10-05"),
 ]
 
 
