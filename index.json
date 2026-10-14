@@ -273,5 +273,16 @@
     "ja_path": "articles/ja/25_how-we-contain-claude.md",
     "pdf_path": "pdfs/25_how-we-contain-claude.pdf",
     "pdf_size_bytes": 1976394
+  },
+  {
+    "number": 26,
+    "slug": "redesigning-source-control",
+    "title": "Redesigning source control at Anthropic",
+    "date": "2026-10-13",
+    "source_url": "https://www.anthropic.com/engineering/redesigning-source-control",
+    "en_path": "articles/en/26_redesigning-source-control.md",
+    "ja_path": "articles/ja/26_redesigning-source-control.md",
+    "pdf_path": "pdfs/26_redesigning-source-control.pdf",
+    "pdf_size_bytes": 2626979
   }
 ]
