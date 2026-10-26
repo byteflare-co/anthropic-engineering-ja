@@ -184,6 +184,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(154, "claude-for-government-is-now-generally-available", "Claude for Government is now generally available", "2026-09-30"),
     ClaudeArticleMeta(155, "claude-code-mods", "Customize Claude Code with mods", "2026-10-01"),
     ClaudeArticleMeta(156, "how-cresta-turned-cx-expertise-into-an-agent-builder-on-the-claude-agent-sdk", "How Cresta turned CX expertise into an agent builder on the Claude Agent SDK", "2026-10-05"),
+    ClaudeArticleMeta(157, "building-agents-when-to-fold-subagents-into-your-main-agent-loop", "Building agents: When to fold subagents into your main agent loop", "2026-10-22"),
 ]
 
 
