@@ -114,7 +114,9 @@ def clean_claude_blog_markdown(md_text: str) -> str:
             for idx in range(cat_idx, min(cat_idx + 40, len(lines))):
                 ln = lines[idx].strip()
                 # share URL 行 (Copy link の下の生 URL) まで辿ったら次を見る
-                if ln.startswith("https://claude.com/blog/"):
+                if ln.startswith(
+                    ("https://claude.com/blog/", "https://claude.com/resources/articles/")
+                ):
                     end = idx
                     break
             # URL 行が見つからなかった場合は、次の空行 + 通常テキストのペアを境界とする

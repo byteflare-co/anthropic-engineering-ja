@@ -1,6 +1,6 @@
 """Claude ブログに新着記事があるかを確認する。
 
-claude.com/blog は SPA なので Playwright で取得する。
+claude.com/blog（2026-10 に /resources/articles へ移転）は SPA なので Playwright で取得する。
 
 使い方:
     uv run python scripts/check_new_claude_articles.py
@@ -26,13 +26,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from claude_articles import CLAUDE_ARTICLES  # noqa: E402
 
-INDEX_URL = "https://claude.com/blog"
+INDEX_URL = "https://claude.com/resources/articles"
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/145.0.0.0 Safari/537.36"
 )
-SLUG_RE = re.compile(r"^/blog/([^/?#]+)/?$")
+SLUG_RE = re.compile(r"^/(?:blog|resources/articles)/([^/?#]+)/?$")
 
 EXCLUDED_PREFIXES = ("category/", "blog-category/")
 
@@ -103,7 +103,7 @@ def extract_articles(html: str) -> list[dict[str, str]]:
     order: list[str] = []
     for a in soup.find_all("a", href=True):
         href = a["href"]
-        if href.startswith("https://claude.com/blog/"):
+        if href.startswith("https://claude.com/"):
             href = href.replace("https://claude.com", "")
         match = SLUG_RE.match(href)
         if not match:
@@ -128,8 +128,9 @@ def extract_articles(html: str) -> list[dict[str, str]]:
         if specific:
             title = max(specific, key=len)
         else:
-            href = f"/blog/{slug}"
-            card_title = _card_title_for_href(soup, href)
+            card_title = _card_title_for_href(
+                soup, f"/resources/articles/{slug}"
+            ) or _card_title_for_href(soup, f"/blog/{slug}")
             if card_title:
                 title = card_title
             else:
