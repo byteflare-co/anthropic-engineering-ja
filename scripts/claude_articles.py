@@ -189,6 +189,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(159, "expanding-claude-for-nonprofits", "Expanding Claude for Nonprofits", "2026-10-26"),
     ClaudeArticleMeta(160, "how-to-manage-costs-and-demonstrate-roi-for-claude-code-on-google-cloud", "Manage costs and demonstrate ROI for Claude Code on Google Cloud", "2026-10-27"),
     ClaudeArticleMeta(161, "smart-reports-surveys-pooled-budgets", "Smart reports, surveys, and pooled group budgets for Claude Enterprise", "2026-10-28"),
+    ClaudeArticleMeta(162, "introducing-artifacts-for-legal-work", "Introducing artifacts for legal work", "2026-10-28"),
 ]
 
 
