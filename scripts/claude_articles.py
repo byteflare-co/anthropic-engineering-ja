@@ -191,6 +191,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(161, "smart-reports-surveys-pooled-budgets", "Smart reports, surveys, and pooled group budgets for Claude Enterprise", "2026-10-28"),
     ClaudeArticleMeta(162, "introducing-artifacts-for-legal-work", "Introducing artifacts for legal work", "2026-10-28"),
     ClaudeArticleMeta(163, "message-threads", "Make long-running agents faster with message threads", "2026-11-02"),
+    ClaudeArticleMeta(164, "new-agents-and-products-claude-marketplace", "New agents and products for security, productivity, and creative work on Claude Marketplace", "2026-11-04"),
 ]
 
 
