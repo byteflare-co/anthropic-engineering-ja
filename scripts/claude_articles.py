@@ -198,6 +198,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(168, "more-ways-to-work-with-claude-sheets-whiteboards-and-interactive-connectors", "More ways to work with Claude: Sheets, Whiteboards, and Interactive Connectors", "2026-11-10"),
     ClaudeArticleMeta(169, "sheets-whiteboards-data", "Introducing Claude Whiteboards, Claude Sheets, and Claude Data", "2026-11-10"),
     ClaudeArticleMeta(170, "building-always-on-agents", "Building always-on agents", "2026-11-13"),
+    ClaudeArticleMeta(171, "claude-tag-guide-for-startups", "The Claude Tag guide for startups", "2026-11-13"),
 ]
 
 
