@@ -221,6 +221,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(191, "how-healthcare-organizations-use-claude-tag", "How healthcare organizations use Claude Tag", "2026-09-14"),
     ClaudeArticleMeta(192, "salesforce-in-claude", "Bringing Salesforce into Claude", "2026-09-15"),
     ClaudeArticleMeta(193, "claude-duet", "Introducing Claude Duet", "2026-10-21"),
+    ClaudeArticleMeta(194, "dashboards-and-motion", "Build live dashboards and animate explainers with Claude", "2026-10-08"),
 ]
 
 
