@@ -114,10 +114,29 @@ def _extract_summary(md_content: str, max_len: int = 180) -> str:
 
 # ---- Article loading ----------------------------------------------------
 
+# python-frontmatter only reads the first YAML block. If title_ja is written
+# after that block's closing ---, the site falls back to the English title
+# for <h1>. Fail the build so publish cannot commit that shape.
+_TITLE_JA_AFTER_FRONTMATTER = re.compile(
+    r"\A---\r?\n.*?\r?\n---\r?\n(?:\s*\r?\n)*title_ja\s*:",
+    re.DOTALL,
+)
+
+
+def _require_title_ja_in_frontmatter(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+    if _TITLE_JA_AFTER_FRONTMATTER.match(text):
+        raise ValueError(
+            f"{path}: title_ja is outside the first YAML frontmatter block; "
+            "move it above the closing ---"
+        )
+
+
 def _load_article(meta: ArticleMeta) -> dict | None:
     ja_path = ROOT / "articles" / "ja" / f"{meta.stem}.md"
     if not ja_path.exists():
         return None
+    _require_title_ja_in_frontmatter(ja_path)
     post = frontmatter.load(ja_path)
     title_ja = post.metadata.get("title_ja") or meta.title
     date = post.metadata.get("date") or meta.date or ""
@@ -138,6 +157,7 @@ def _load_claude_article(meta: ClaudeArticleMeta) -> dict | None:
     ja_path = ROOT / "articles" / "claude_ja" / f"{meta.stem}.md"
     if not ja_path.exists():
         return None
+    _require_title_ja_in_frontmatter(ja_path)
     post = frontmatter.load(ja_path)
     title_ja = post.metadata.get("title_ja") or meta.title
     date = post.metadata.get("date") or meta.date or ""
