@@ -216,6 +216,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(186, "the-new-rules-of-context-engineering-for-claude-5-generation-models", "The new rules of context engineering for Claude 5 generation models", "2026-07-24"),
     ClaudeArticleMeta(187, "how-abc-legal-turned-every-employee-into-a-builder-with-claude-managed-agents", "How ABC Legal turned every employee into a builder with Claude Managed Agents", "2026-08-17"),
     ClaudeArticleMeta(188, "ai-ci-cd-on-call", "Claude on call: How Claude Tag serves as Anthropic’s first responder for CI/CD failures", "2026-08-18"),
+    ClaudeArticleMeta(189, "how-monday-com-transformed-its-platform-into-an-agent-first-product-where-humans-and-agents-collaborate", "How monday.com transformed its platform into an agent-first product where humans and agents collaborate", "2026-08-20"),
 ]
 
 
