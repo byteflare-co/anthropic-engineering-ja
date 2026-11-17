@@ -126,7 +126,7 @@ jobs:
                `articles/claude_ja/NN_<slug>.md` に書き出す。
                - 既存の翻訳 (`articles/claude_ja/` 内) のスタイルに合わせる。
                - です・ます調。固有名詞は原文維持。コードは原文維持。
-               - YAML frontmatter に `title_ja` を追加。
+               - 最初の YAML frontmatter（閉じる `---` より前）に `title_ja` を追加する。閉じた後に置かない。
                - frontmatter `date` は EN 側と同じ値を設定する。
             6. `uv run python scripts/build_site.py` でサイトをビルドし、
                エラーがないことを確認する。
@@ -142,6 +142,7 @@ jobs:
             - 翻訳は機械的・雑にせず、既存翻訳の品質を保つこと。
             - YAML frontmatter の `title_ja` にコロンが含まれるなら
               ダブルクォートで囲む。
+            - `title_ja` は最初の frontmatter ブロック内（閉じる `---` より前）に置く。
             - `open` コマンドは macOS 専用なので CI では使わない。
             - 何か根本的に失敗したら issue にコメントして状況を報告して終了する。
 

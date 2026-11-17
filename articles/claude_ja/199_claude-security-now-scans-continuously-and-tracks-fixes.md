@@ -6,7 +6,6 @@ selector_used: article
 slug: claude-security-now-scans-continuously-and-tracks-fixes
 source_url: https://claude.com/blog/claude-security-now-scans-continuously-and-tracks-fixes
 title: Claude Security now scans continuously and tracks fixes
----
 title_ja: Claude Security が継続的なスキャンと修正の追跡に対応（Claude Security now scans continuously and tracks fixes）
 ---
 

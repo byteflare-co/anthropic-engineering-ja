@@ -7,7 +7,6 @@ slug: working-at-the-frontier-how-balyasny-asset-management-evaluates-and-govern
 source_url: https://claude.com/blog/working-at-the-frontier-how-balyasny-asset-management-evaluates-and-governs-claude-fable-5
 title: 'Working at the frontier: How Balyasny Asset Management evaluates and governs
   Claude Fable 5'
----
 title_ja: "フロンティアで働く：Balyasny Asset Management は Claude Fable 5 をどう評価し、統制しているか（Working at the frontier: How Balyasny Asset Management evaluates and governs Claude Fable 5）"
 ---
 
