@@ -196,6 +196,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(166, "claude-enterprise-security-updates", "More visibility and control over Claude Enterprise for security teams", "2026-11-05"),
     ClaudeArticleMeta(167, "interactive-connectors-full-tool", "Your apps can now open in Claude, and Claude can work in them", "2026-11-10"),
     ClaudeArticleMeta(168, "more-ways-to-work-with-claude-sheets-whiteboards-and-interactive-connectors", "More ways to work with Claude: Sheets, Whiteboards, and Interactive Connectors", "2026-11-10"),
+    ClaudeArticleMeta(169, "sheets-whiteboards-data", "Introducing Claude Whiteboards, Claude Sheets, and Claude Data", "2026-11-10"),
 ]
 
 
