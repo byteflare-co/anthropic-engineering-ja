@@ -54,6 +54,7 @@ ARTICLES: list[ArticleMeta] = [
     ArticleMeta(25, "how-we-contain-claude", "How we contain Claude across products", ""),
     ArticleMeta(26, "redesigning-source-control", "Redesigning source control at Anthropic", ""),
     ArticleMeta(27, "components-of-agent-memory", "The components of agent memory", ""),
+    ArticleMeta(28, "confidential-inference-trusted-vms", "Confidential Inference via Trusted Virtual Machines", ""),
 ]
 
 

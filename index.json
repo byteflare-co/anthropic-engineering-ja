@@ -295,5 +295,16 @@
     "ja_path": "articles/ja/27_components-of-agent-memory.md",
     "pdf_path": "pdfs/27_components-of-agent-memory.pdf",
     "pdf_size_bytes": 25188929
+  },
+  {
+    "number": 28,
+    "slug": "confidential-inference-trusted-vms",
+    "title": "Confidential Inference via Trusted Virtual Machines",
+    "date": "2025-06-18",
+    "source_url": "https://www.anthropic.com/engineering/confidential-inference-trusted-vms",
+    "en_path": "articles/en/28_confidential-inference-trusted-vms.md",
+    "ja_path": "articles/ja/28_confidential-inference-trusted-vms.md",
+    "pdf_path": "pdfs/28_confidential-inference-trusted-vms.pdf",
+    "pdf_size_bytes": 870525
   }
 ]
