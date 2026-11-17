@@ -7,7 +7,6 @@ slug: how-monday-com-transformed-its-platform-into-an-agent-first-product-where-
 source_url: https://claude.com/blog/how-monday-com-transformed-its-platform-into-an-agent-first-product-where-humans-and-agents-collaborate
 title: How monday.com transformed its platform into an agent-first product where humans
   and agents collaborate
----
 title_ja: monday.com はいかにしてプラットフォームを、人とエージェントが協働するエージェントファーストのプロダクトへと変革したか
 ---
 

@@ -6,7 +6,6 @@ selector_used: article
 slug: idc-brings-quanta-into-claude-and-adopts-claude-across-the-company
 source_url: https://claude.com/blog/idc-brings-quanta-into-claude-and-adopts-claude-across-the-company
 title: IDC brings Quanta into Claude and adopts Claude across the company
----
 title_ja: IDC が IDC Quanta を Claude に統合し、全社で Claude を導入（IDC brings Quanta into Claude and adopts Claude across the company）
 ---
 

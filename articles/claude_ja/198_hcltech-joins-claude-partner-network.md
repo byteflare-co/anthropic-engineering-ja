@@ -6,7 +6,6 @@ selector_used: article
 slug: hcltech-joins-claude-partner-network
 source_url: https://claude.com/blog/hcltech-joins-claude-partner-network
 title: HCLTech joins the Claude Partner Network as a Global Premier partner
----
 title_ja: HCLTech が Global Premier パートナーとして Claude Partner Network に参加（HCLTech joins the Claude Partner Network as a Global Premier partner）
 ---
 
