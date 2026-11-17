@@ -284,5 +284,16 @@
     "ja_path": "articles/ja/26_redesigning-source-control.md",
     "pdf_path": "pdfs/26_redesigning-source-control.pdf",
     "pdf_size_bytes": 2626979
+  },
+  {
+    "number": 27,
+    "slug": "components-of-agent-memory",
+    "title": "The components of agent memory",
+    "date": "2026-11-06",
+    "source_url": "https://www.anthropic.com/engineering/components-of-agent-memory",
+    "en_path": "articles/en/27_components-of-agent-memory.md",
+    "ja_path": "articles/ja/27_components-of-agent-memory.md",
+    "pdf_path": "pdfs/27_components-of-agent-memory.pdf",
+    "pdf_size_bytes": 25188929
   }
 ]
