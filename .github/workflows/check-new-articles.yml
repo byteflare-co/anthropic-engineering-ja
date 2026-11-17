@@ -55,6 +55,7 @@ jobs:
               }
             );
             const existingTitles = new Set(existing.map(i => i.title));
+            const createdNumbers = [];
 
             for (const article of data.new_articles) {
               const title = `📰 新着記事: ${article.title}`;
@@ -90,20 +91,29 @@ jobs:
                 labels: ['new-article'],
               });
               console.log(`Created issue #${created.data.number}: ${title}`);
+              createdNumbers.push(created.data.number);
+            }
 
-              // GITHUB_TOKEN で作った issue の "opened" イベントは downstream
-              // workflow をトリガしない（GitHub のループ防止機構）ので、
-              // publish-new-article.yml を明示的に workflow_dispatch する。
+            // GITHUB_TOKEN で作った issue の "opened" イベントは downstream
+            // workflow をトリガしない（GitHub のループ防止機構）ので、
+            // publish-new-article.yml を明示的に workflow_dispatch する。
+            //
+            // 同じ concurrency group では、cancel-in-progress: false でも
+            // pending は 1 本しか残らない。一気に全部 dispatch すると
+            // 2 本目以降がキャンセルされるので、先頭の 1 本だけ起動し、
+            // 残りは publish 成功後にチェーンする。
+            if (createdNumbers.length > 0) {
+              const first = createdNumbers[0];
               await github.rest.actions.createWorkflowDispatch({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 workflow_id: 'publish-new-article.yml',
                 ref: 'main',
                 inputs: {
-                  issue_number: String(created.data.number),
+                  issue_number: String(first),
                 },
               });
-              console.log(`Dispatched publish-new-article.yml for issue #${created.data.number}`);
+              console.log(`Dispatched publish-new-article.yml for issue #${first} (1 of ${createdNumbers.length})`);
             }
 
       - name: Summary
