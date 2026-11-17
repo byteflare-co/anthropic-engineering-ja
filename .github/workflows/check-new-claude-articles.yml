@@ -60,6 +60,7 @@ jobs:
               }
             );
             const existingTitles = new Set(existing.map(i => i.title));
+            const createdNumbers = [];
 
             for (const article of data.new_articles) {
               const title = `📰 Claude 新着記事: ${article.title}`;
@@ -95,17 +96,23 @@ jobs:
                 labels: ['new-claude-article'],
               });
               console.log(`Created issue #${created.data.number}: ${title}`);
+              createdNumbers.push(created.data.number);
+            }
 
+            // 同じ concurrency group では pending は 1 本しか残らない。
+            // 先頭の 1 本だけ起動し、残りは publish 成功後にチェーンする。
+            if (createdNumbers.length > 0) {
+              const first = createdNumbers[0];
               await github.rest.actions.createWorkflowDispatch({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 workflow_id: 'publish-new-claude-article.yml',
                 ref: 'main',
                 inputs: {
-                  issue_number: String(created.data.number),
+                  issue_number: String(first),
                 },
               });
-              console.log(`Dispatched publish-new-claude-article.yml for issue #${created.data.number}`);
+              console.log(`Dispatched publish-new-claude-article.yml for issue #${first} (1 of ${createdNumbers.length})`);
             }
 
       - name: Summary

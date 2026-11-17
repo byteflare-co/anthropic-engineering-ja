@@ -14,6 +14,7 @@ on:
         type: string
 
 permissions:
+  actions: write       # 次の open issue を workflow_dispatch するため
   contents: write       # articles.py, articles/, pdfs/ の書き込みと push
   issues: write         # コメント・close
   pull-requests: write  # Claude Code Action が内部で使う可能性あり
@@ -171,3 +172,40 @@ jobs:
           gh issue comment "${{ steps.target.outputs.number }}" \
             --repo "${{ github.repository }}" \
             --body "⚠️ 自動 publish workflow が失敗しました。詳しくはログを確認してください: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Dispatch next open article
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            // Stale issues from before the 2026-11-17 outage are left for
+            // manual triage (some may already be published or have bad URLs).
+            const cutoff = '2026-11-17T00:00:00Z';
+            const current = String(context.payload.inputs?.issue_number || '');
+            const issues = await github.paginate(
+              github.rest.issues.listForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+                labels: 'new-article',
+                per_page: 100,
+              }
+            );
+            const pending = issues
+              .filter(i => i.created_at >= cutoff)
+              .filter(i => String(i.number) !== current)
+              .sort((a, b) => a.number - b.number);
+            if (pending.length === 0) {
+              console.log('No remaining recent open new-article issues');
+              return;
+            }
+            const next = pending[0];
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'publish-new-article.yml',
+              ref: 'main',
+              inputs: { issue_number: String(next.number) },
+            });
+            console.log(`Dispatched next issue #${next.number}: ${next.title}`);
