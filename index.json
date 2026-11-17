@@ -306,5 +306,16 @@
     "ja_path": "articles/ja/28_confidential-inference-trusted-vms.md",
     "pdf_path": "pdfs/28_confidential-inference-trusted-vms.pdf",
     "pdf_size_bytes": 870525
+  },
+  {
+    "number": 29,
+    "slug": "building-strong-safety-evaluations",
+    "title": "Building strong safety evaluations",
+    "date": "2026-11-13",
+    "source_url": "https://www.anthropic.com/engineering/building-strong-safety-evaluations",
+    "en_path": "articles/en/29_building-strong-safety-evaluations.md",
+    "ja_path": "articles/ja/29_building-strong-safety-evaluations.md",
+    "pdf_path": "pdfs/29_building-strong-safety-evaluations.pdf",
+    "pdf_size_bytes": 8368940
   }
 ]
