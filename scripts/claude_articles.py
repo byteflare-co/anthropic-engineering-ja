@@ -211,6 +211,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(181, "linked-billing-on-claude-platform", "Linked billing on the Claude Platform", "2026-11-17"),
     ClaudeArticleMeta(182, "claude-design-stays-on-brand-for-daily-work", "Claude Design now stays on brand for daily work", "2026-06-17"),
     ClaudeArticleMeta(183, "claude-model-and-effort-level-in-claude-code", "Choosing a Claude model and effort level in Claude Code", "2026-07-07"),
+    ClaudeArticleMeta(184, "cowork-web-mobile", "Claude Cowork is coming to mobile and web", "2026-07-07"),
 ]
 
 
