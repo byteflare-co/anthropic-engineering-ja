@@ -218,6 +218,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(188, "ai-ci-cd-on-call", "Claude on call: How Claude Tag serves as Anthropic’s first responder for CI/CD failures", "2026-08-18"),
     ClaudeArticleMeta(189, "how-monday-com-transformed-its-platform-into-an-agent-first-product-where-humans-and-agents-collaborate", "How monday.com transformed its platform into an agent-first product where humans and agents collaborate", "2026-08-20"),
     ClaudeArticleMeta(190, "claude-for-financial-advisors", "Claude for Financial Advisors", "2026-10-27"),
+    ClaudeArticleMeta(191, "how-healthcare-organizations-use-claude-tag", "How healthcare organizations use Claude Tag", "2026-09-14"),
 ]
 
 
