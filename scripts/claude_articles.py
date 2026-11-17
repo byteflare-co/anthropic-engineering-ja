@@ -222,6 +222,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(192, "salesforce-in-claude", "Bringing Salesforce into Claude", "2026-09-15"),
     ClaudeArticleMeta(193, "claude-duet", "Introducing Claude Duet", "2026-10-21"),
     ClaudeArticleMeta(194, "dashboards-and-motion", "Build live dashboards and animate explainers with Claude", "2026-10-08"),
+    ClaudeArticleMeta(195, "unified-claude-enterprise", "Claude Cowork and chat come together for Enterprise", "2026-10-23"),
 ]
 
 
