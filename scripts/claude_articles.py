@@ -225,6 +225,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(195, "unified-claude-enterprise", "Claude Cowork and chat come together for Enterprise", "2026-10-23"),
     ClaudeArticleMeta(196, "claude-duet-safety-privacy-and-security", "Claude Duet Safety, Privacy, and Security", "2026-10-23"),
     ClaudeArticleMeta(197, "claude-models-on-google-cloud-anthropic-managed", "The full Claude Platform, available on Google Cloud", "2026-10-22"),
+    ClaudeArticleMeta(198, "hcltech-joins-claude-partner-network", "HCLTech joins the Claude Partner Network as a Global Premier partner", "2026-10-21"),
 ]
 
 
