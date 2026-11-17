@@ -9,7 +9,8 @@ httpx + BeautifulSoup だけで完結する。
 出力:
     - 標準出力に JSON: {"new_articles": [...], "count": N, ...}
     - GitHub Actions 環境では `$GITHUB_OUTPUT` に `new_count` を書き出す。
-    - 終了コードは新着の有無に関わらず常に 0（CI 側で count を使って分岐する）。
+    - 一覧から 1 本も抽出できないときは終了コード 1（サイト側の HTML 変更を
+      成功扱いにしない）。それ以外は新着の有無に関わらず 0。
 """
 
 from __future__ import annotations
@@ -34,7 +35,11 @@ USER_AGENT = (
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/145.0.0.0 Safari/537.36"
 )
-SLUG_RE = re.compile(r"^/engineering/([^/?#]+)/?$")
+# 2026-11 時点で記事 URL は /engineering/<slug> から /research/<slug> へ
+# 308 リダイレクトされている。一覧ページの href も /research/ になっている。
+SLUG_RE = re.compile(r"^/(?:engineering|research)/([^/?#]+)/?$")
+
+EXCLUDED_PREFIXES = ("team", "team/")
 
 
 def fetch_index_html() -> str:
@@ -84,28 +89,41 @@ def extract_articles(html: str) -> list[dict[str, str]]:
     """
     soup = BeautifulSoup(html, "html.parser")
     candidates: dict[str, list[str]] = {}
+    urls: dict[str, str] = {}
     order: list[str] = []
     for a in soup.find_all("a", href=True):
-        match = SLUG_RE.match(a["href"])
+        href = a["href"]
+        if href.startswith("https://www.anthropic.com"):
+            href = href.replace("https://www.anthropic.com", "", 1)
+        match = SLUG_RE.match(href)
         if not match:
             continue
         slug = match.group(1)
+        if any(slug == p or slug.startswith(p) for p in EXCLUDED_PREFIXES):
+            continue
         title = _title_from_anchor(a)
         if not title:
             continue
         if slug not in candidates:
             candidates[slug] = []
             order.append(slug)
+            urls[slug] = f"https://www.anthropic.com{href}"
+        elif href.startswith("/research/"):
+            urls[slug] = f"https://www.anthropic.com{href}"
         candidates[slug].append(title)
 
+    generic_titles = {"read more", "learn more", "continue reading"}
     found: list[dict[str, str]] = []
     for slug in order:
-        texts = sorted(set(candidates[slug]), key=len)
+        texts = [t for t in set(candidates[slug]) if t.lower() not in generic_titles]
+        if not texts:
+            texts = list(set(candidates[slug]))
+        texts = sorted(texts, key=len)
         found.append(
             {
                 "slug": slug,
                 "title": texts[0],
-                "url": f"https://www.anthropic.com/engineering/{slug}",
+                "url": urls[slug],
             }
         )
     return found
@@ -136,6 +154,13 @@ def main() -> int:
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
     write_github_output(new)
+    if not found:
+        print(
+            "error: extracted 0 articles from the engineering index; "
+            "the page structure may have changed",
+            file=sys.stderr,
+        )
+        return 1
     return 0
 
 

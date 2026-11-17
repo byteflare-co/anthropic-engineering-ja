@@ -30,7 +30,10 @@ jobs:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       contains(github.event.issue.labels.*.name, 'new-article')
-    runs-on: ubuntu-latest
+    # ubuntu-latest started landing on 26.04 on 2026-11-07;
+    # Playwright 1.58 cannot install Chromium there.
+    # Pin 24.04 until Playwright is upgraded to >=1.61.
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
 
     steps:
