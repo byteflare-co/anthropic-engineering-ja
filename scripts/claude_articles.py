@@ -223,6 +223,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(193, "claude-duet", "Introducing Claude Duet", "2026-10-21"),
     ClaudeArticleMeta(194, "dashboards-and-motion", "Build live dashboards and animate explainers with Claude", "2026-10-08"),
     ClaudeArticleMeta(195, "unified-claude-enterprise", "Claude Cowork and chat come together for Enterprise", "2026-10-23"),
+    ClaudeArticleMeta(196, "claude-duet-safety-privacy-and-security", "Claude Duet Safety, Privacy, and Security", "2026-10-23"),
 ]
 
 
