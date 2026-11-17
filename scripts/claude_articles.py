@@ -208,7 +208,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(178, "claude-for-the-legal-industry", "Claude for the legal industry", "2026-05-12"),
     ClaudeArticleMeta(179, "best-practices-for-computer-and-browser-use-with-claude", "Best practices for computer and browser use with Claude", "2026-05-13"),
     ClaudeArticleMeta(180, "best-practices-for-getting-started-with-claude-cowork", "Best practices for getting started with Claude Cowork", "2026-06-03"),
-    ClaudeArticleMeta(181, "linked-billing-on-claude-platform", "Linked billing on the Claude Platform", "2026-11-17"),
+    ClaudeArticleMeta(181, "linked-billing-on-claude-platform", "Linked billing on the Claude Platform", "2026-09-17"),
     ClaudeArticleMeta(182, "claude-design-stays-on-brand-for-daily-work", "Claude Design now stays on brand for daily work", "2026-06-17"),
     ClaudeArticleMeta(183, "claude-model-and-effort-level-in-claude-code", "Choosing a Claude model and effort level in Claude Code", "2026-07-07"),
     ClaudeArticleMeta(184, "cowork-web-mobile", "Claude Cowork is coming to mobile and web", "2026-07-07"),
@@ -229,6 +229,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(199, "claude-security-now-scans-continuously-and-tracks-fixes", "Claude Security now scans continuously and tracks fixes", "2026-10-21"),
     ClaudeArticleMeta(200, "how-an-anthropic-japan-business-development-representative-runs-his-day", "How an Anthropic BDR in Japan runs his day with Claude Managed Agents", "2026-10-16"),
     ClaudeArticleMeta(201, "idc-brings-quanta-into-claude-and-adopts-claude-across-the-company", "IDC brings Quanta into Claude and adopts Claude across the company", "2026-10-28"),
+    ClaudeArticleMeta(202, "working-at-the-frontier-how-balyasny-asset-management-evaluates-and-governs-claude-fable-5", "Working at the frontier: How Balyasny Asset Management evaluates and governs Claude Fable 5", "2026-09-17"),
 ]
 
 
