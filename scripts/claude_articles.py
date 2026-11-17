@@ -224,6 +224,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(194, "dashboards-and-motion", "Build live dashboards and animate explainers with Claude", "2026-10-08"),
     ClaudeArticleMeta(195, "unified-claude-enterprise", "Claude Cowork and chat come together for Enterprise", "2026-10-23"),
     ClaudeArticleMeta(196, "claude-duet-safety-privacy-and-security", "Claude Duet Safety, Privacy, and Security", "2026-10-23"),
+    ClaudeArticleMeta(197, "claude-models-on-google-cloud-anthropic-managed", "The full Claude Platform, available on Google Cloud", "2026-10-22"),
 ]
 
 
