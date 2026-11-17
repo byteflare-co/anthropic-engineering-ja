@@ -209,6 +209,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(179, "best-practices-for-computer-and-browser-use-with-claude", "Best practices for computer and browser use with Claude", "2026-05-13"),
     ClaudeArticleMeta(180, "best-practices-for-getting-started-with-claude-cowork", "Best practices for getting started with Claude Cowork", "2026-06-03"),
     ClaudeArticleMeta(181, "linked-billing-on-claude-platform", "Linked billing on the Claude Platform", "2026-11-17"),
+    ClaudeArticleMeta(182, "claude-design-stays-on-brand-for-daily-work", "Claude Design now stays on brand for daily work", "2026-06-17"),
 ]
 
 
