@@ -200,6 +200,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(170, "building-always-on-agents", "Building always-on agents", "2026-11-13"),
     ClaudeArticleMeta(171, "claude-tag-guide-for-startups", "The Claude Tag guide for startups", "2026-11-13"),
     ClaudeArticleMeta(172, "self-hosted-claude-managed-agents", "Operate Claude Managed Agents inside your security perimeter", "2026-11-12"),
+    ClaudeArticleMeta(173, "j-crew-style-advisor-with-claude", "J. Crew brings its signature approach to styling to life with Claude", "2026-11-12"),
 ]
 
 
