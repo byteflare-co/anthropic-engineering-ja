@@ -228,6 +228,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(198, "hcltech-joins-claude-partner-network", "HCLTech joins the Claude Partner Network as a Global Premier partner", "2026-10-21"),
     ClaudeArticleMeta(199, "claude-security-now-scans-continuously-and-tracks-fixes", "Claude Security now scans continuously and tracks fixes", "2026-10-21"),
     ClaudeArticleMeta(200, "how-an-anthropic-japan-business-development-representative-runs-his-day", "How an Anthropic BDR in Japan runs his day with Claude Managed Agents", "2026-10-16"),
+    ClaudeArticleMeta(201, "idc-brings-quanta-into-claude-and-adopts-claude-across-the-company", "IDC brings Quanta into Claude and adopts Claude across the company", "2026-10-28"),
 ]
 
 
