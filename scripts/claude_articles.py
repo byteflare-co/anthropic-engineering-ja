@@ -213,6 +213,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(183, "claude-model-and-effort-level-in-claude-code", "Choosing a Claude model and effort level in Claude Code", "2026-07-07"),
     ClaudeArticleMeta(184, "cowork-web-mobile", "Claude Cowork is coming to mobile and web", "2026-07-07"),
     ClaudeArticleMeta(185, "working-at-the-frontier-cursor", "Working at the frontier: How Cursor knew Claude Fable 5 was ready for the hardest 1% of problems", "2026-07-17"),
+    ClaudeArticleMeta(186, "the-new-rules-of-context-engineering-for-claude-5-generation-models", "The new rules of context engineering for Claude 5 generation models", "2026-07-24"),
 ]
 
 
