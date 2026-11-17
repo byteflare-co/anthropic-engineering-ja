@@ -205,6 +205,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(175, "claude-meetings", "Introducing Claude Meetings", "2026-11-12"),
     ClaudeArticleMeta(176, "using-claude-opus-5-5-as-your-daily-driver-for-knowledge-work", "Using Claude Opus 5.5 as your daily driver for knowledge work", "2026-11-12"),
     ClaudeArticleMeta(177, "how-curative-is-building-a-national-provider-network-with-agents-on-claude", "How Curative is building a national provider network with agents on Claude", "2026-11-10"),
+    ClaudeArticleMeta(178, "claude-for-the-legal-industry", "Claude for the legal industry", "2026-05-12"),
 ]
 
 
