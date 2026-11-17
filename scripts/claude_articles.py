@@ -214,6 +214,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(184, "cowork-web-mobile", "Claude Cowork is coming to mobile and web", "2026-07-07"),
     ClaudeArticleMeta(185, "working-at-the-frontier-cursor", "Working at the frontier: How Cursor knew Claude Fable 5 was ready for the hardest 1% of problems", "2026-07-17"),
     ClaudeArticleMeta(186, "the-new-rules-of-context-engineering-for-claude-5-generation-models", "The new rules of context engineering for Claude 5 generation models", "2026-07-24"),
+    ClaudeArticleMeta(187, "how-abc-legal-turned-every-employee-into-a-builder-with-claude-managed-agents", "How ABC Legal turned every employee into a builder with Claude Managed Agents", "2026-08-17"),
 ]
 
 
