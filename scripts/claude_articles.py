@@ -231,6 +231,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(201, "idc-brings-quanta-into-claude-and-adopts-claude-across-the-company", "IDC brings Quanta into Claude and adopts Claude across the company", "2026-10-28"),
     ClaudeArticleMeta(202, "working-at-the-frontier-how-balyasny-asset-management-evaluates-and-governs-claude-fable-5", "Working at the frontier: How Balyasny Asset Management evaluates and governs Claude Fable 5", "2026-09-17"),
     ClaudeArticleMeta(203, "kpmg-todd-lohr-on-ai-when-your-data-is-also-your-clients-data", "KPMG's Todd Lohr on AI when your data is also your clients' data", "2026-11-23"),
+    ClaudeArticleMeta(204, "zero-data-retention-with-enterprise-frontier-safeguards", "Zero data retention with Enterprise Frontier Safeguards is now in beta", "2026-11-23"),
 ]
 
 
