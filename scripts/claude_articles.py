@@ -233,6 +233,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(203, "kpmg-todd-lohr-on-ai-when-your-data-is-also-your-clients-data", "KPMG's Todd Lohr on AI when your data is also your clients' data", "2026-11-23"),
     ClaudeArticleMeta(204, "zero-data-retention-with-enterprise-frontier-safeguards", "Zero data retention with Enterprise Frontier Safeguards is now in beta", "2026-11-23"),
     ClaudeArticleMeta(205, "introducing-claude-ship", "Introducing Claude Ship", "2026-11-23"),
+    ClaudeArticleMeta(206, "enterprise-guide-to-securing-coding-agents", "The enterprise guide to securing coding agents", "2026-11-23"),
 ]
 
 
