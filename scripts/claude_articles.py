@@ -234,6 +234,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(204, "zero-data-retention-with-enterprise-frontier-safeguards", "Zero data retention with Enterprise Frontier Safeguards is now in beta", "2026-11-23"),
     ClaudeArticleMeta(205, "introducing-claude-ship", "Introducing Claude Ship", "2026-11-23"),
     ClaudeArticleMeta(206, "enterprise-guide-to-securing-coding-agents", "The enterprise guide to securing coding agents", "2026-11-23"),
+    ClaudeArticleMeta(207, "install-as-app", "Turn artifacts into Mac and Windows apps", "2026-11-24"),
 ]
 
 
