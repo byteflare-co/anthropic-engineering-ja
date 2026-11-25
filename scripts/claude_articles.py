@@ -235,6 +235,7 @@ CLAUDE_ARTICLES: list[ClaudeArticleMeta] = [
     ClaudeArticleMeta(205, "introducing-claude-ship", "Introducing Claude Ship", "2026-11-23"),
     ClaudeArticleMeta(206, "enterprise-guide-to-securing-coding-agents", "The enterprise guide to securing coding agents", "2026-11-23"),
     ClaudeArticleMeta(207, "install-as-app", "Turn artifacts into Mac and Windows apps", "2026-11-24"),
+    ClaudeArticleMeta(208, "skills-over-mcp-tasks-and-more", "MCP servers can now ship skills, run tasks, and more with Claude", "2026-11-24"),
 ]
 
 
