@@ -56,6 +56,7 @@ ARTICLES: list[ArticleMeta] = [
     ArticleMeta(27, "components-of-agent-memory", "The components of agent memory", ""),
     ArticleMeta(28, "confidential-inference-trusted-vms", "Confidential Inference via Trusted Virtual Machines", ""),
     ArticleMeta(29, "building-strong-safety-evaluations", "Building strong safety evaluations", ""),
+    ArticleMeta(30, "migrating-api-to-rust", "Migrating our Messages API to Rust", ""),
 ]
 
 

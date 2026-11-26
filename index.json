@@ -317,5 +317,16 @@
     "ja_path": "articles/ja/29_building-strong-safety-evaluations.md",
     "pdf_path": "pdfs/29_building-strong-safety-evaluations.pdf",
     "pdf_size_bytes": 8368940
+  },
+  {
+    "number": 30,
+    "slug": "migrating-api-to-rust",
+    "title": "Migrating our Messages API to Rust",
+    "date": "2026-11-25",
+    "source_url": "https://www.anthropic.com/engineering/migrating-api-to-rust",
+    "en_path": "articles/en/30_migrating-api-to-rust.md",
+    "ja_path": "articles/ja/30_migrating-api-to-rust.md",
+    "pdf_path": "pdfs/30_migrating-api-to-rust.pdf",
+    "pdf_size_bytes": 10180597
   }
 ]
